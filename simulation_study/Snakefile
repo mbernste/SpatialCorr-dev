@@ -1,0 +1,1035 @@
+## 
+
+configfile: 'config.json'
+
+rule all:
+    input:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.0.tsv",    
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.0.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.0025.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.025.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.05.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.1.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.0025.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.025.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.05.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.1.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_within_dino-config_static.corr.differ.means.2.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_static.corr.differ.means.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_1.differ.means.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_2.differ.means.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_4.differ.means.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_0.static.means_CALML5.spotwise.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_1.static.means_CALML5.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_2.static.means_CALML5.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_4.static.means_CALML5.tsv",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_2.CALML5_sigma_10_cs_0.035.json",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_4.CALML5_sigma_10_cs_0.035.json",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_8.CALML5_sigma_10_cs_0.035.json",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035.json",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035_v2.json",
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035_v3.json"
+         
+
+############################################################################
+# Null samples based on CALML5 and CALML5 in which correlation at all spots 
+# is zero. No changes in mean expression across the slide.
+#############################################################################
+rule generate_data_sigma_10_cs_0_0_CALML5_CALML5:
+    output:
+        [
+            f"{config['output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.0 -n 200 -g CALML5,CALML5 -o {config['output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_sigma_10_cs_0_0_CALML5_CALML5:
+    input:
+        [
+            f"{config['output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0",
+            f"python run_dino.py {config['output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0 {config['dino_output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0_CALML5_CALML5:
+    input:
+        [
+            f"{config['dino_output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.0.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/g_CALML5.CALML5_sigma_10_cs_0.0 -f dino -n 20 -b 5 -t 10 -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+
+#############################################################################
+# Null samples based on PECAM1 and PECAM1 in which correlation at all spots 
+# is zero. No changes in mean expression across the slide.
+#############################################################################
+DSET_PECAM1_PECAM1_S_10_CS_0_0 = 'g_PECAM1.PECAM1_sigma_10_cs_0.0'
+rule generate_data_sigma_10_cs_0_0_PECAM1_PECAM1:
+    output:
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.0 -n 200 -g PECAM1,PECAM1 -o {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_sigma_10_cs_0_0_PECAM1_PECAM1:
+    input:
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}",
+            f"python run_dino.py {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0} {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0_PECAM1_PECAM1:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.0.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0} -f dino -n 20 -b 5 -t 10 -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+############################################################################
+# Alternative samples based on CALML5 and CALML5 in which correlation at 
+# is changing across the slide. We increase the covariance strength 
+# parameter for each set of simulations. No changes in mean expression
+# across the slide.
+#############################################################################
+
+DSET_CALML5_CALML5_S_10_CS_0_0025 = 'g_CALML5.CALML5_sigma_10_cs_0.0025' 
+DSET_CALML5_CALML5_S_10_CS_0_025 = 'g_CALML5.CALML5_sigma_10_cs_0.025'
+DSET_CALML5_CALML5_S_10_CS_0_05 = 'g_CALML5.CALML5_sigma_10_cs_0.05'
+DSET_CALML5_CALML5_S_10_CS_0_1 = 'g_CALML5.CALML5_sigma_10_cs_0.1'
+
+rule generate_data_sigma_10_cs_0_0025_to_0_1_CALML5_CALML5:
+    output:
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}",
+            f"mkdir -p {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}",
+            f"mkdir -p {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}",
+            f"mkdir -p {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.0025 -n 30 -g CALML5,CALML5 -o {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.025 -n 30 -g CALML5,CALML5 -o {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.05 -n 30 -g CALML5,CALML5 -o {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.1 -n 30 -g CALML5,CALML5 -o {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_sigma_10_cs_0_0025_to_0_1_CALML5_CALML5:
+    input:
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}",
+            f"python run_dino.py {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025} {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}",
+            f"python run_dino.py {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025} {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}",
+            f"python run_dino.py {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05} {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}",
+            f"python run_dino.py {config['output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1} {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0025_to_0_1_CALML5_CALML5:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        out_0_0025=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.0025.tsv",
+        out_0_025=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.025.tsv",
+        out_0_05=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.05.tsv",
+        out_0_1=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_CALML5.CALML5_sf_spotwise_sigma_10_cs_0.1.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_0025} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_0025}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_025} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_025}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_05} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_CALML5_CALML5_S_10_CS_0_1} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_1}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+############################################################################
+# Alternative samples based on PECAM1 and PECAM1 in which correlation at 
+# is changing across the slide. We increase the covariance strength 
+# parameter for each set of simulations. No changes in mean expression
+# across the slide.
+############################################################################
+
+DSET_PECAM1_PECAM1_S_10_CS_0_0025 = 'g_PECAM1.PECAM1_sigma_10_cs_0.0025'
+DSET_PECAM1_PECAM1_S_10_CS_0_025 = 'g_PECAM1.PECAM1_sigma_10_cs_0.025'
+DSET_PECAM1_PECAM1_S_10_CS_0_05 = 'g_PECAM1.PECAM1_sigma_10_cs_0.05'
+DSET_PECAM1_PECAM1_S_10_CS_0_1 = 'g_PECAM1.PECAM1_sigma_10_cs_0.1'
+
+rule generate_data_sigma_10_cs_0_0025_to_0_1_PECAM1_PECAM1:
+    output:
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(5)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}",
+            f"mkdir -p {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}",
+            f"mkdir -p {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}",
+            f"mkdir -p {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.0025 -n 5 -g PECAM1,PECAM1 -o {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.025 -n 5 -g PECAM1,PECAM1 -o {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.05 -n 5 -g PECAM1,PECAM1 -o {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}",
+            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.1 -n 5 -g PECAM1,PECAM1 -o {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule dino_normalize_sigma_10_cs_0_0025_to_0_1_PECAM1_PECAM1:
+    input:
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(5)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(5)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}",
+            f"python run_dino.py {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025} {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}",
+            f"python run_dino.py {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025} {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}",
+            f"python run_dino.py {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05} {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}",
+            f"python run_dino.py {config['output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1} {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0025_to_0_1_PECAM1_PECAM1:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05}/{d_i}.tsv"
+            for d_i in range(5)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1}/{d_i}.tsv"
+            for d_i in range(5)
+        ]
+    output:
+        out_0_0025=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.0025.tsv",
+        out_0_025=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.025.tsv",
+        out_0_05=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.05.tsv",
+        out_0_1=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-g_PECAM1.PECAM1_sf_spotwise_sigma_10_cs_0.1.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_0025} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_0025}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_025} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_025}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_05} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_PECAM1_PECAM1_S_10_CS_0_1} -f dino -n 20 -b 5 -t 10 -o {{output.out_0_1}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+###############################################################
+#   Generate null data for two histological regions in which
+#   there is zero correlation at each spot, but means differ
+#   between two regions. The two regions partition the slide
+#   in half.
+###############################################################
+DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS = 'config_static.corr.differ.means.2'
+rule generate_data_two_clusts_static_corr_differ_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2) # TODO 200
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/config_static.corr.differ.means.2",
+            f"python simulate_data_within_condition.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_static_corr_differ_means_2.json -o {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_static_corr_differ_means:
+    input:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2) 
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_clust_test_whr_two_clusts_static_corr_differ_means:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_within_dino-config_static.corr.differ.means.2.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -c cluster -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+###############################################################
+#   Generate null data for two histological regions in which
+#   there is zero correlation at each spot, but means differ
+#   between two regions. The two regions are based on real
+#   clusters computed on the data.
+#
+#   Run the BHR test on these data.
+###############################################################
+DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS = 'config_static.corr.differ.means'
+rule generate_data_two_clusts_no_split_static_corr_differ_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}",
+            f"python simulate_data_within_condition.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_static_corr_differ_means.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_no_split_static_corr_differ_means:
+    input:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_clust_test_whr_two_clusts_no_split_static_corr_differ_means:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_static.corr.differ.means.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+###############################################################
+#   Generate alternative data for two histological regions in 
+#   which there is static correlation within region, but it 
+#   differs between them. The means also differ between two 
+#   regions. The two regions are based on real clusters 
+#   computed on the data.
+#
+#   Run the BHR test on these data.
+###############################################################
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS = 'config_differ.corr_between_0_1.differ.means'
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS = 'config_differ.corr_between_0_2.differ.means'
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS = 'config_differ.corr_between_0_4.differ.means'
+
+rule generate_data_diff_corr_between_0_1_to_0_4_differ_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_1_differ_means.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_2_differ_means.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_4_differ_means.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule dino_normalize_two_clusts_no_split_diff_corr_between_0_1_to_0_4_differ_means:
+    input:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule run_test_sigma_5_condition_clust_test_bhr_two_clusts_no_split_diff_corr_between_0_1_to_0_4_differ_means:
+    input:
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        diff_0_1=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_1.differ.means.tsv",
+        diff_0_2=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_2.differ.means.tsv",
+        diff_0_4=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_4.differ.means.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+###############################################################
+#   Generate null data for two histological regions in which
+#   there is zero correlation at each spot and means are the
+#   same (based on CALML5) between the two regions. The two 
+#   regions are based on real clusters computed on the data.
+#
+#   Run the BHR test on these data.
+###############################################################
+
+DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS = 'config_differ.corr_between_0_0.static.means_CALML5.spotwise'
+
+rule generate_data_two_clusts_no_split_static_corr_static_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 200
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_diff_corrs_0_0_static_means_CALML5.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_no_split_static_corr_static_means:
+    input:
+        [   
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_clust_test_whr_two_clusts_no_split_static_corr_static_means:
+    input:
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_0.static.means_CALML5.spotwise.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_STATIC_CORR_STATIC_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+###############################################################
+#   Generate alternative data for two histological regions in 
+#   which there is static correlation within region, but it 
+#   differs between them. The means don't differ between two 
+#   regions. The two regions are based on real clusters 
+#   computed on the data.
+#
+#   Run the BHR test on these data.
+###############################################################
+
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS = 'config_differ.corr_between_0_1.static.means_CALML5'
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS = 'config_differ.corr_between_0_2.static.means_CALML5'
+DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS = 'config_differ.corr_between_0_4.static.means_CALML5'
+
+rule generate_data_diff_corr_between_0_1_to_0_4_static_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_1_static_means_CALML5.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_2_static_means_CALML5.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}",
+            f"python simulate_data_between.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_corrs_0_4_static_means_CALML5.json -o {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_no_split_diff_corr_between_0_1_to_0_4_static_means:
+    input:
+        [   
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_clust_test_bhr_two_clusts_no_split_diff_corr_between_0_1_to_0_4_static_means:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        diff_0_1=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_1.static.means_CALML5.tsv",
+        diff_0_2=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_2.static.means_CALML5.tsv",
+        diff_0_4=f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_between_dino-config_differ.corr_between_0_4.static.means_CALML5.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_2_STATIC_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_4_STATIC_MEANS} -f dino -n 20 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+
+######################################################################################
+#   Simulate multiple genes. Test how the method performs as more genes are included
+#   in the anlaysis.
+######################################################################################
+
+DSET_MULT_GENES_2_CS_0_035 = 'mg_2.CALML5_sigma_10_cs_0.035'
+DSET_MULT_GENES_4_CS_0_035 = 'mg_4.CALML5_sigma_10_cs_0.035'
+DSET_MULT_GENES_8_CS_0_035 = 'mg_8.CALML5_sigma_10_cs_0.035'
+
+rule generate_data_multiple_genes_cs_0_035_two_to_eight_CALML5:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_2_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_4_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_8_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_2_CS_0_035}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_4_CS_0_035}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_8_CS_0_035}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_2_CS_0_035}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5,CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_4_CS_0_035}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5,CALML5,CALML5,CALML5,CALML5,CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_8_CS_0_035}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_035_two_to_eight_CALML5:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_2_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_4_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_8_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_2_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_4_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_8_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_2_CS_0_035}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_4_CS_0_035}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_8_CS_0_035}",
+            f"python run_dino.py -g 2 {config['output_location']}/{DSET_MULT_GENES_2_CS_0_035} {config['dino_output_location']}/{DSET_MULT_GENES_2_CS_0_035}",
+            f"python run_dino.py -g 4 {config['output_location']}/{DSET_MULT_GENES_4_CS_0_035} {config['dino_output_location']}/{DSET_MULT_GENES_4_CS_0_035}",
+            f"python run_dino.py -g 8 {config['output_location']}/{DSET_MULT_GENES_8_CS_0_035} {config['dino_output_location']}/{DSET_MULT_GENES_8_CS_0_035}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_035_two_to_eight_CALML5:
+    input:
+        [   
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_2_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_4_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [   
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_8_CS_0_035}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_2.CALML5_sigma_10_cs_0.035.json",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_4.CALML5_sigma_10_cs_0.035.json",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_8.CALML5_sigma_10_cs_0.035.json"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_2_CS_0_035} -f dino -n 20 -b 5 -t 10 -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_4_CS_0_035} -f dino -n 20 -b 5 -t 10 -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_8_CS_0_035} -f dino -n 20 -b 5 -t 10 -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+######################################################################################
+#   Simulate datasets with 5 genes for comparing the joint vs pairwise tests.
+######################################################################################
+DSET_MULT_GENES_5_CS_0_035_V1 = 'mg_5.CALML5_sigma_10_cs_0.035'
+DSET_MULT_GENES_5_CS_0_035_V2 = 'mg_5.CALML5_sigma_10_cs_0.035_v2'
+DSET_MULT_GENES_5_CS_0_035_V3 = 'mg_5.CALML5_sigma_10_cs_0.035_v3'
+
+rule generate_data_multiple_genes_cs_0_035_five_CALML5:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}/{d_i}.tsv"
+            for d_i in range(2) # TODO change to 40
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5,CALML5,CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5,CALML5,CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}",
+            f"python simulate_data_within_mult_genes_no_condition.py -s spotwise -b 10 -c 0.035 -n 2 -g CALML5,CALML5,CALML5,CALML5,CALML5 -o {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule dino_normalize_multiple_genes_cs_0_035_five_CALML5:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}",
+            f"python run_dino.py -g 5 {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1} {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}",
+            f"python run_dino.py -g 5 {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2} {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}",
+            f"python run_dino.py -g 5 {config['output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3} {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_035_five_CALML5:
+    input:
+        [  
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [  
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [  
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        v1=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035.json",
+        v2=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035_v2.json",
+        v3=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.CALML5_sigma_10_cs_0.035_v3.json"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V1} -f dino -n 20 -b 5 -t 10 -m 5 -o {{output.v1}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V2} -f dino -n 20 -b 5 -t 10 -m 5 -o {{output.v2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_5_CS_0_035_V3} -f dino -n 20 -b 5 -t 10 -m 5 -o {{output.v3}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+
+
+

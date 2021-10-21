@@ -1,0 +1,6 @@
+{
+    "output_location": "/Users/matthewbernstein/Development/spatialcorr_paper/simulation_study/simulated_datasets",
+    "dino_output_location": "/Users/matthewbernstein/Development/spatialcorr_paper/simulation_study/dino_normalized_simulated_datasets",
+    "spatialcorr_output_location": "/Users/matthewbernstein/Development/spatialcorr_paper/simulation_study/spatialcorr_results",
+    "simulation_configs": "/Users/matthewbernstein/Development/spatialcorr_paper/simulation_study/simulation_configs"
+}
