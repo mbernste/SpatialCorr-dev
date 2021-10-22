@@ -1,0 +1,139 @@
+{
+ "gene_set_to_genes": {
+  "GO_KERATINOCYTE_PROLIFERATION": [
+   "CDH3",
+   "EPPK1",
+   "IRF6",
+   "KRT2",
+   "NOTCH2",
+   "SDR16C5",
+   "SFN",
+   "SLURP1",
+   "SRSF6",
+   "TGM1",
+   "TP63",
+   "ZFP36",
+   "ZFP36L1"
+  ],
+  "GO_REGULATION_OF_KERATINOCYTE_PROLIFERATION": [
+   "CDH3",
+   "EPPK1",
+   "NOTCH2",
+   "SFN",
+   "SLURP1",
+   "SRSF6",
+   "TGM1",
+   "TP63",
+   "ZFP36",
+   "ZFP36L1"
+  ],
+  "GO_REGULATION_OF_KERATINOCYTE_DIFFERENTIATION": [
+   "AQP3",
+   "CDSN",
+   "CTSL",
+   "CTSV",
+   "GRHL1",
+   "NUMA1",
+   "SERPINB13",
+   "SRSF6",
+   "TP63",
+   "ZFP36",
+   "ZFP36L1"
+  ],
+  "GO_KERATINOCYTE_DEVELOPMENT": [
+   "CDSN",
+   "FLNB",
+   "FOSL2",
+   "KRT2",
+   "PSAP",
+   "SFN"
+  ],
+  "GO_KERATINOCYTE_MIGRATION": [
+   "ARF6",
+   "EPPK1",
+   "KRT16",
+   "KRT2",
+   "MAP4K4",
+   "PTEN"
+  ],
+  "GO_KERATINOCYTE_DIFFERENTIATION": [
+   "CSTA",
+   "FLG",
+   "KRT1",
+   "KRT10",
+   "KRT14",
+   "KRT16",
+   "KRT17",
+   "KRT5",
+   "KRT6A",
+   "KRT6B",
+   "KRT6C",
+   "PERP",
+   "S100A7",
+   "SFN",
+   "SPRR1B"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_KERATINOCYTE_PROLIFERATION": 1.0,
+  "GO_REGULATION_OF_KERATINOCYTE_PROLIFERATION": 0.9523809523809523,
+  "GO_REGULATION_OF_KERATINOCYTE_DIFFERENTIATION": 0.5263157894736842,
+  "GO_KERATINOCYTE_DEVELOPMENT": 0.1941747572815534,
+  "GO_KERATINOCYTE_MIGRATION": 1.0,
+  "GO_KERATINOCYTE_DIFFERENTIATION": 0.5555555555555556
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_KERATINOCYTE_PROLIFERATION": [
+   3,
+   4,
+   6,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_KERATINOCYTE_PROLIFERATION": [
+   3,
+   4,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_KERATINOCYTE_DIFFERENTIATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "GO_KERATINOCYTE_DEVELOPMENT": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   11
+  ],
+  "GO_KERATINOCYTE_MIGRATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_KERATINOCYTE_DIFFERENTIATION": [
+   3,
+   5,
+   8,
+   9
+  ]
+ }
+}

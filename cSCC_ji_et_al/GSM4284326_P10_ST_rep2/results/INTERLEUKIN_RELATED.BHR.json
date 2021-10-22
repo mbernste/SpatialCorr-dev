@@ -1,0 +1,441 @@
+{
+ "gene_set_to_genes": {
+  "GO_RESPONSE_TO_INTERLEUKIN_4": [
+   "ARG1",
+   "FASN",
+   "GATA3",
+   "HSP90AB1",
+   "HSPA5",
+   "IL4R",
+   "IMPDH2",
+   "RPL3",
+   "RPS2",
+   "STAT6",
+   "XBP1"
+  ],
+  "GO_INTERLEUKIN_1_PRODUCTION": [
+   "ACP5",
+   "ANXA1",
+   "APP",
+   "CD36",
+   "FOXP1",
+   "GAS6",
+   "GSTP1",
+   "HK1",
+   "HMGB1",
+   "HSPB1",
+   "IFI16",
+   "PYCARD",
+   "SERPINB1",
+   "SIRPA"
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_1_PRODUCTION": [
+   "APP",
+   "HK1",
+   "HMGB1",
+   "HSPB1",
+   "IFI16",
+   "PYCARD"
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_1": [
+   "ANXA1",
+   "APP",
+   "CEBPB",
+   "PSMA7",
+   "PSMB3",
+   "PSMB4",
+   "PSMB7",
+   "PSMD1",
+   "PSMD2",
+   "PSMD8",
+   "RPS27A",
+   "SKP1",
+   "UBA52",
+   "UBB",
+   "UBC"
+  ],
+  "GO_INTERLEUKIN_1_MEDIATED_SIGNALING_PATHWAY": [
+   "IL1RN",
+   "PSMA7",
+   "PSMB3",
+   "PSMB4",
+   "PSMB7",
+   "PSMD1",
+   "PSMD11",
+   "PSMD2",
+   "PSMD8",
+   "PSME2",
+   "RPS27A",
+   "SKP1",
+   "UBA52",
+   "UBB",
+   "UBC"
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_10_PRODUCTION": [
+   "CD46",
+   "HMGB1",
+   "HSPD1",
+   "IL20RB",
+   "PYCARD"
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_6_PRODUCTION": [
+   "APP",
+   "CD36",
+   "CD74",
+   "CYBA",
+   "HMGB1",
+   "HSPD1",
+   "IL1RN",
+   "MAPK13",
+   "PYCARD",
+   "RAB7B",
+   "STAT3",
+   "XBP1"
+  ],
+  "GO_NEGATIVE_REGULATION_OF_INTERLEUKIN_2_PRODUCTION": [
+   "EZR",
+   "GATA3",
+   "IL20RB",
+   "PRNP",
+   "ZFP36"
+  ],
+  "GO_INTERLEUKIN_1_BETA_PRODUCTION": [
+   "ACP5",
+   "APP",
+   "CD36",
+   "FOXP1",
+   "GSTP1",
+   "HK1",
+   "HMGB1",
+   "HSPB1",
+   "IFI16",
+   "PYCARD",
+   "SERPINB1",
+   "SIRPA"
+  ],
+  "GO_INTERLEUKIN_10_PRODUCTION": [
+   "CD46",
+   "CD47",
+   "HMGB1",
+   "HSPD1",
+   "IL20RB",
+   "PYCARD"
+  ],
+  "GO_INTERLEUKIN_12_PRODUCTION": [
+   "ACP5",
+   "CD36",
+   "CD47",
+   "FOXP1",
+   "HMGB1",
+   "HSPD1",
+   "MAPK14",
+   "NFKB1"
+  ],
+  "GO_INTERLEUKIN_2_PRODUCTION": [
+   "ANXA1",
+   "EZR",
+   "GATA3",
+   "IL20RB",
+   "PRNP",
+   "RPS3",
+   "SPTBN1",
+   "STOML2",
+   "ZFP36"
+  ],
+  "GO_INTERLEUKIN_6_PRODUCTION": [
+   "APP",
+   "CAPN2",
+   "CD36",
+   "CD47",
+   "CD74",
+   "CEBPB",
+   "CYBA",
+   "GAS6",
+   "HMGB1",
+   "HSPD1",
+   "IL1RN",
+   "MAPK13",
+   "MAPKAPK2",
+   "PYCARD",
+   "XBP1"
+  ],
+  "GO_INTERLEUKIN_8_PRODUCTION": [
+   "ANXA1",
+   "CD14",
+   "CD74",
+   "KLF4",
+   "PARK7",
+   "PYCARD",
+   "RAB1A",
+   "TMSB4X"
+  ],
+  "GO_INTERLEUKIN_1_SECRETION": [
+   "CD36",
+   "FOXP1",
+   "GAS6",
+   "HK1",
+   "HMGB1",
+   "PYCARD",
+   "SERPINB1"
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_12": [
+   "ANXA2",
+   "ARF1",
+   "CDC42",
+   "CFL1",
+   "CNN2",
+   "GSTO1",
+   "HNRNPA2B1",
+   "HNRNPF",
+   "MSN",
+   "P4HB",
+   "PDCD4",
+   "PPIA",
+   "PSME2",
+   "RPLP0",
+   "SOD2"
+  ],
+  "GO_INTERLEUKIN_8_SECRETION": [
+   "ANXA1",
+   "CD14",
+   "PYCARD",
+   "RAB1A",
+   "TMSB4X"
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_7": [
+   "GIPC1",
+   "HDGF",
+   "P4HB",
+   "PDIA3",
+   "RAD23B",
+   "SMARCA4",
+   "STAT3",
+   "YBX1"
+  ],
+  "GO_REGULATION_OF_INTERLEUKIN_1_SECRETION": [
+   "FOXP1",
+   "GAS6",
+   "HK1",
+   "HMGB1",
+   "PYCARD",
+   "SERPINB1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_RESPONSE_TO_INTERLEUKIN_4": 0.23255813953488372,
+  "GO_INTERLEUKIN_1_PRODUCTION": 0.078125,
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_1_PRODUCTION": 0.032520325203252036,
+  "GO_RESPONSE_TO_INTERLEUKIN_1": 0.6896551724137931,
+  "GO_INTERLEUKIN_1_MEDIATED_SIGNALING_PATHWAY": 0.6451612903225806,
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_10_PRODUCTION": 0.9090909090909091,
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_6_PRODUCTION": 0.5405405405405406,
+  "GO_NEGATIVE_REGULATION_OF_INTERLEUKIN_2_PRODUCTION": 0.625,
+  "GO_INTERLEUKIN_1_BETA_PRODUCTION": 0.07874015748031496,
+  "GO_INTERLEUKIN_10_PRODUCTION": 0.8,
+  "GO_INTERLEUKIN_12_PRODUCTION": 0.09259259259259259,
+  "GO_INTERLEUKIN_2_PRODUCTION": 0.425531914893617,
+  "GO_INTERLEUKIN_6_PRODUCTION": 0.8695652173913043,
+  "GO_INTERLEUKIN_8_PRODUCTION": 0.21739130434782608,
+  "GO_INTERLEUKIN_1_SECRETION": 0.28169014084507044,
+  "GO_RESPONSE_TO_INTERLEUKIN_12": 0.6896551724137931,
+  "GO_INTERLEUKIN_8_SECRETION": 0.2222222222222222,
+  "GO_RESPONSE_TO_INTERLEUKIN_7": 0.3076923076923077,
+  "GO_REGULATION_OF_INTERLEUKIN_1_SECRETION": 0.273972602739726
+ },
+ "gene_set_to_pairwise_pvals": {
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_1_PRODUCTION": {
+   "APP,HK1": 0.0625,
+   "APP,HMGB1": 0.37037037037037035,
+   "APP,HSPB1": 0.8333333333333334,
+   "APP,IFI16": 0.21505376344086022,
+   "APP,PYCARD": 0.8695652173913043,
+   "HK1,HMGB1": 0.09900990099009901,
+   "HK1,HSPB1": 0.6896551724137931,
+   "HK1,IFI16": 0.049019607843137254,
+   "HK1,PYCARD": 0.7142857142857143,
+   "HMGB1,HSPB1": 0.11695906432748537,
+   "HMGB1,IFI16": 0.7692307692307693,
+   "HMGB1,PYCARD": 0.21739130434782608,
+   "HSPB1,IFI16": 0.9090909090909091,
+   "HSPB1,PYCARD": 0.8695652173913043,
+   "IFI16,PYCARD": 0.45454545454545453
+  }
+ },
+ "gene_set_to_keep_clusts": {
+  "GO_RESPONSE_TO_INTERLEUKIN_4": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_1_PRODUCTION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_1_PRODUCTION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_1": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_1_MEDIATED_SIGNALING_PATHWAY": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_10_PRODUCTION": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_INTERLEUKIN_6_PRODUCTION": [
+   4,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_NEGATIVE_REGULATION_OF_INTERLEUKIN_2_PRODUCTION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_1_BETA_PRODUCTION": [
+   3,
+   4,
+   5,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_10_PRODUCTION": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_12_PRODUCTION": [
+   4,
+   5,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_2_PRODUCTION": [
+   4,
+   5,
+   6,
+   8,
+   9
+  ],
+  "GO_INTERLEUKIN_6_PRODUCTION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   11
+  ],
+  "GO_INTERLEUKIN_8_PRODUCTION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_1_SECRETION": [
+   3,
+   4,
+   5,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_12": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_INTERLEUKIN_8_SECRETION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "GO_RESPONSE_TO_INTERLEUKIN_7": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "GO_REGULATION_OF_INTERLEUKIN_1_SECRETION": [
+   3,
+   4,
+   5,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}

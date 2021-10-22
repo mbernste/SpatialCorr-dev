@@ -1,0 +1,84 @@
+{
+ "gene_set_to_genes": {
+  "GO_CELL_DIVISION": [
+   "ACTR2",
+   "CALM1",
+   "CDC42",
+   "CFL1",
+   "ENSA",
+   "HNRNPU",
+   "MYH9",
+   "PPP1CA",
+   "RACK1",
+   "RAN",
+   "RHOA",
+   "RPS3",
+   "SFN",
+   "SON",
+   "ZFP36L2"
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": [
+   "CDC25B",
+   "CDC42",
+   "GIPC1",
+   "RHOA",
+   "VEGFA",
+   "YBX1"
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   "C10orf99",
+   "CALM1",
+   "CALM2",
+   "CDC25B",
+   "CDC42",
+   "CIB1",
+   "GIPC1",
+   "PRPF40A",
+   "RAB11A",
+   "RACK1",
+   "RHOA",
+   "SFN",
+   "TP63",
+   "TXNIP",
+   "YBX1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_CELL_DIVISION": 0.9523809523809523,
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": 0.24691358024691357,
+  "GO_REGULATION_OF_CELL_DIVISION": 0.47619047619047616
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_CELL_DIVISION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}

@@ -1,0 +1,240 @@
+{
+ "gene_set_to_genes": {
+  "GO_NECROTIC_CELL_DEATH": [
+   "BNIP3",
+   "CAV1",
+   "CD14",
+   "HEBP2",
+   "PPIF",
+   "PYGL",
+   "TMEM123",
+   "TSPO",
+   "YBX3"
+  ],
+  "GO_CELL_DEATH_IN_RESPONSE_TO_OXIDATIVE_STRESS": [
+   "ATF4",
+   "CTNNB1",
+   "GPX1",
+   "HIF1A",
+   "HSPB1",
+   "MCL1",
+   "MMP3",
+   "P4HB",
+   "PARK7",
+   "PSAP",
+   "RACK1",
+   "SFPQ",
+   "SOD2",
+   "STK24",
+   "TXN"
+  ],
+  "GO_REGULATION_OF_NECROTIC_CELL_DEATH": [
+   "BNIP3",
+   "CAV1",
+   "HEBP2",
+   "PPIF",
+   "TSPO",
+   "YBX3"
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DEATH": [
+   "CASP14",
+   "CTSD",
+   "GRN",
+   "RACK1",
+   "RPL11",
+   "RPL26",
+   "RPS27A",
+   "RPS3",
+   "RPS6",
+   "RPS7",
+   "S100A8",
+   "S100A9",
+   "SFN",
+   "UBA52",
+   "UBC"
+  ],
+  "GO_NEGATIVE_REGULATION_OF_CELL_DEATH": [
+   "CD44",
+   "CFL1",
+   "ENO1",
+   "GRN",
+   "GSTP1",
+   "HSPB1",
+   "RACK1",
+   "RPL10",
+   "RPS27A",
+   "RPS3A",
+   "RPS6",
+   "SFN",
+   "TPT1",
+   "UBA52",
+   "UBC"
+  ],
+  "GO_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": [
+   "ATF4",
+   "CTNNB1",
+   "GPX1",
+   "HIF1A",
+   "HSPB1",
+   "MCL1",
+   "MMP3",
+   "NFE2L2",
+   "P4HB",
+   "PARK7",
+   "PSAP",
+   "RACK1",
+   "SFPQ",
+   "SOD2",
+   "TXN"
+  ],
+  "GO_REGULATION_OF_CELL_DEATH": [
+   "CTSD",
+   "ENO1",
+   "GSTP1",
+   "HSPB1",
+   "PERP",
+   "RACK1",
+   "RPL11",
+   "RPS27A",
+   "RPS3",
+   "RPS6",
+   "S100A8",
+   "S100A9",
+   "SFN",
+   "TPT1",
+   "UBA52"
+  ],
+  "GO_POSITIVE_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": [
+   "MCL1",
+   "MMP3",
+   "PARK7",
+   "SFPQ",
+   "SOD1"
+  ],
+  "GO_CELL_DEATH_IN_RESPONSE_TO_HYDROGEN_PEROXIDE": [
+   "NFE2L2",
+   "PARK7",
+   "PSAP",
+   "RACK1",
+   "STK25",
+   "TXN"
+  ],
+  "GO_PROGRAMMED_NECROTIC_CELL_DEATH": [
+   "CAV1",
+   "CD14",
+   "PPIF",
+   "PYGL",
+   "YBX3"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_NECROTIC_CELL_DEATH": 0.7142857142857143,
+  "GO_CELL_DEATH_IN_RESPONSE_TO_OXIDATIVE_STRESS": 1.0,
+  "GO_REGULATION_OF_NECROTIC_CELL_DEATH": 0.6896551724137931,
+  "GO_POSITIVE_REGULATION_OF_CELL_DEATH": 0.8695652173913043,
+  "GO_NEGATIVE_REGULATION_OF_CELL_DEATH": 0.9523809523809523,
+  "GO_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": 0.8333333333333334,
+  "GO_REGULATION_OF_CELL_DEATH": 0.125,
+  "GO_POSITIVE_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": 0.19230769230769232,
+  "GO_CELL_DEATH_IN_RESPONSE_TO_HYDROGEN_PEROXIDE": 0.7142857142857143,
+  "GO_PROGRAMMED_NECROTIC_CELL_DEATH": 1.0
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_NECROTIC_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_CELL_DEATH_IN_RESPONSE_TO_OXIDATIVE_STRESS": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_NECROTIC_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   9,
+   11
+  ],
+  "GO_NEGATIVE_REGULATION_OF_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_OXIDATIVE_STRESS_INDUCED_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_CELL_DEATH_IN_RESPONSE_TO_HYDROGEN_PEROXIDE": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "GO_PROGRAMMED_NECROTIC_CELL_DEATH": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "gene_set_to_genes": {
+  "GO_POSITIVE_REGULATION_OF_DNA_REPLICATION": [
+   "CDC42",
+   "EGFR",
+   "HRAS",
+   "RAC1",
+   "STOML2"
+  ],
+  "GO_DNA_DEPENDENT_DNA_REPLICATION": [
+   "BAZ1A",
+   "BCL6",
+   "HMGA1",
+   "MCM7",
+   "NUCKS1",
+   "POLD2",
+   "POLE4",
+   "SSBP1",
+   "STOML2",
+   "WDR18"
+  ],
+  "GO_POSTREPLICATION_REPAIR": [
+   "FAAP20",
+   "NPLOC4",
+   "POLD2",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC",
+   "UBE2N",
+   "VCP"
+  ],
+  "GO_REGULATION_OF_DNA_REPLICATION": [
+   "ANKRD17",
+   "BCL6",
+   "CDC42",
+   "EGFR",
+   "HRAS",
+   "NUCKS1",
+   "PPP2CA",
+   "PPP2R1A",
+   "RAC1",
+   "RBBP6",
+   "S100A11",
+   "STOML2",
+   "WDR18"
+  ],
+  "GO_DNA_REPLICATION": [
+   "BAZ1A",
+   "BCL6",
+   "CDC42",
+   "HMGA1",
+   "NAP1L1",
+   "NFIC",
+   "NUCKS1",
+   "POLD2",
+   "PPP2CA",
+   "PPP2R1A",
+   "PTMS",
+   "RAC1",
+   "S100A11",
+   "SET",
+   "SSRP1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_POSITIVE_REGULATION_OF_DNA_REPLICATION": 0.6896551724137931,
+  "GO_DNA_DEPENDENT_DNA_REPLICATION": 0.08368200836820083,
+  "GO_POSTREPLICATION_REPAIR": 0.14388489208633093,
+  "GO_REGULATION_OF_DNA_REPLICATION": 0.7692307692307693,
+  "GO_DNA_REPLICATION": 0.13986013986013987
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_POSITIVE_REGULATION_OF_DNA_REPLICATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_DNA_DEPENDENT_DNA_REPLICATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSTREPLICATION_REPAIR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "GO_REGULATION_OF_DNA_REPLICATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_DNA_REPLICATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}

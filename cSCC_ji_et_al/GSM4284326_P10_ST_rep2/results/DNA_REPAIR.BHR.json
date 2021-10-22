@@ -1,0 +1,102 @@
+{
+ "gene_set_to_genes": {
+  "GO_REGULATION_OF_DNA_REPAIR": [
+   "ACTR2",
+   "EGFR",
+   "FUS",
+   "HMGB1",
+   "OTUB1",
+   "PPP4C",
+   "PRKDC",
+   "RPS3",
+   "TRIM28",
+   "TRIP12",
+   "UBE2N"
+  ],
+  "GO_DNA_REPAIR": [
+   "ACTR2",
+   "CSNK1E",
+   "HMGA1",
+   "NPM1",
+   "POLR2L",
+   "RPS27A",
+   "RPS3",
+   "SFPQ",
+   "STUB1",
+   "UBA52",
+   "UBB",
+   "UBC",
+   "UBE2D3",
+   "VCP",
+   "ZBTB7A"
+  ],
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": [
+   "ACTR2",
+   "EGFR",
+   "FUS",
+   "HMGB1",
+   "PRKDC",
+   "RPS3",
+   "TRIM28",
+   "UBE2N"
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   "FAAP20",
+   "NPLOC4",
+   "POLD2",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC",
+   "VCP"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_REGULATION_OF_DNA_REPAIR": 0.3076923076923077,
+  "GO_DNA_REPAIR": 0.5,
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": 0.47619047619047616,
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": 0.3125
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_REGULATION_OF_DNA_REPAIR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_DNA_REPAIR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ }
+}
