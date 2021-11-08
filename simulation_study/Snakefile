@@ -1030,6 +1030,168 @@ rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_035_five_CALML
             shell(c)
 
 
+######################################################################################
+#   Simulate multiple genes from two clusters with identical means, but differing
+#   correlations that are static within each region. Test how the BR-test performs 
+#   as more genes are included in the anlaysis.
+######################################################################################
+
+DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS = 'mg_2.corr_between_0_1.static.means_CALML5.spotwise'
+DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS = 'mg_4.corr_between_0_1.static.means_CALML5.spotwise'
+DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS = 'mg_8.corr_between_0_1.static.means_CALML5.spotwise'
+
+rule generate_data_multiple_genes_two_clusts_static_within_diff_between_0_1_two_to_eight_CALML5:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30) # Should be 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30) # Should be 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30) # Should be 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python simulate_data_between_mult_genes.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_2_diff_corrs_0_1.json -o {config['output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python simulate_data_between_mult_genes.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_4_diff_corrs_0_1.json -o {config['output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python simulate_data_between_mult_genes.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_8_diff_corrs_0_1.json -o {config['output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_two_clusts_static_within_diff_between_0_1_two_to_eight_CALML5:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python run_dino.py -g 2 {config['output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} {config['dino_output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python run_dino.py -g 4 {config['output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} {config['dino_output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python run_dino.py -g 8 {config['output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} {config['dino_output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_multiple_genes_two_clusts_static_within_diff_between_0_1_two_to_eight_CALML5:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        v1=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_between_dino-mg_2.corr_between_0_1.static_means_CALML5.json",
+        v2=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_between_dino-mg_4.corr_between_0_1.static_means_CALML5.json",
+        v3=f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_between_dino-mg_8.corr_between_0_1.static_means_CALML5.json"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_2_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} -f dino -c cluster -w -n 2 -b 5 -t 10 -m 2 -o {{output.v1}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_4_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} -f dino -c cluster -w -n 2 -b 5 -t 10 -m 4 -o {{output.v2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_8_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} -f dino -c cluster -w -n 2 -b 5 -t 10 -m 8 -o {{output.v3}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
 
 
+######################################################################################
+#   Simulate datasets with 5 genes with static correlation within each of two 
+#   clusters for comparing the joint vs pairwise tests using the BR-test.
+######################################################################################
+DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS = 'mg_5.corr_between_0_1.static.means_CALML5.spotwise'
+
+rule generate_data_multiple_genes_five_CALML5_two_clusts_static_within_diff_between_0_1:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(100) 
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python simulate_data_between_mult_genes.py -s spotwise -n 100 -i {config['simulation_configs']}/sim_config_mult_genes_5_diff_corrs_0_1.json -o {config['output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_five_CALML5_two_clusts_static_within_diff_between_0_1:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}",
+            f"python run_dino.py -g 5 {config['output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} {config['dino_output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_between_multiple_genes_five_CALML5_two_clusts_static_within_diff_between_0_1:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS}/{d_i}.tsv"
+            for d_i in range(100)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_none_test_within_dino-mg_5.corr_between_0_1.static_means_CALML5.json",
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_5_TWO_CLUSTS_NO_SPLIT_DIFF_CORR_0_1_STATIC_MEANS} -c cluster -f dino -n 5 -b 5 -t 10 -m 5 -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
 
