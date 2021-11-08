@@ -1,0 +1,59 @@
+{
+ "gene_set_to_genes": {
+  "GO_DNA_REPAIR": [
+   "ACTR2",
+   "HMGA1",
+   "HMGB1",
+   "ISG15",
+   "NOP53",
+   "NUCKS1",
+   "PML",
+   "POLR2L",
+   "RPS27A",
+   "RPS3",
+   "SAMHD1",
+   "UBA52",
+   "UBB",
+   "UBC",
+   "UBE2D3"
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   "ISG15",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_DNA_REPAIR": 1.0,
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": 0.21739130434782608
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   10,
+   11
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}

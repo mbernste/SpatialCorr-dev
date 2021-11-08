@@ -1,0 +1,69 @@
+{
+ "gene_set_to_genes": {
+  "GO_POSTREPLICATION_REPAIR": [
+   "ISG15",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC"
+  ],
+  "GO_DNA_REPLICATION": [
+   "CDC42",
+   "HMGA1",
+   "NUCKS1",
+   "RAC1",
+   "S100A11",
+   "SAMHD1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_POSTREPLICATION_REPAIR": 0.24096385542168675,
+  "GO_DNA_REPLICATION": 0.042643923240938165
+ },
+ "gene_set_to_pairwise_pvals": {
+  "GO_DNA_REPLICATION": {
+   "CDC42,HMGA1": 0.5,
+   "CDC42,NUCKS1": 0.23529411764705882,
+   "CDC42,RAC1": 0.9090909090909091,
+   "CDC42,S100A11": 0.5714285714285714,
+   "CDC42,SAMHD1": 0.45454545454545453,
+   "HMGA1,NUCKS1": 0.625,
+   "HMGA1,RAC1": 0.9523809523809523,
+   "HMGA1,S100A11": 0.3076923076923077,
+   "HMGA1,SAMHD1": 0.06711409395973154,
+   "NUCKS1,RAC1": 0.11494252873563218,
+   "NUCKS1,S100A11": 0.36363636363636365,
+   "NUCKS1,SAMHD1": 0.23809523809523808,
+   "RAC1,S100A11": 0.10582010582010581,
+   "RAC1,SAMHD1": 1.0,
+   "S100A11,SAMHD1": 0.8333333333333334
+  }
+ },
+ "gene_set_to_keep_clusts": {
+  "GO_POSTREPLICATION_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_DNA_REPLICATION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ }
+}

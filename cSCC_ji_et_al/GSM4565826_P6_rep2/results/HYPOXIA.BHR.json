@@ -1,0 +1,36 @@
+{
+ "gene_set_to_genes": {
+  "GO_REGULATION_OF_TRANSCRIPTION_FROM_RNA_POLYMERASE_II_PROMOTER_IN_RESPONSE_TO_HYPOXIA": [
+   "HIF1A",
+   "PSMA1",
+   "PSMA4",
+   "PSMB1",
+   "PSMB3",
+   "PSMB9",
+   "PSME2",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_REGULATION_OF_TRANSCRIPTION_FROM_RNA_POLYMERASE_II_PROMOTER_IN_RESPONSE_TO_HYPOXIA": 0.5
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_REGULATION_OF_TRANSCRIPTION_FROM_RNA_POLYMERASE_II_PROMOTER_IN_RESPONSE_TO_HYPOXIA": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "gene_set_to_genes": {
+  "GO_CELL_DIVISION": [
+   "CALM1",
+   "CDC42",
+   "CFL1",
+   "CLTC",
+   "CSNK1A1",
+   "HNRNPU",
+   "MYH9",
+   "RACK1",
+   "RHOA",
+   "RPS3",
+   "SFN",
+   "TP63",
+   "TUBA1B",
+   "TUBA1C",
+   "TXNIP"
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   "CALM1",
+   "CDC42",
+   "RAB11A",
+   "RACK1",
+   "RHOA",
+   "SFN",
+   "TP63",
+   "TXNIP"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_CELL_DIVISION": 0.36363636363636365,
+  "GO_REGULATION_OF_CELL_DIVISION": 0.21505376344086022
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   10,
+   11
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ]
+ }
+}
