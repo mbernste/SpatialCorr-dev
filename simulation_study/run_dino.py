@@ -12,7 +12,8 @@ N_GENES_TO_CMD = {
     3: './dino_scripts/Dino_three_genes.R',
     4: './dino_scripts/Dino_four_genes.R',
     5: './dino_scripts/Dino_five_genes.R',
-    8: './dino_scripts/Dino_eight_genes.R'
+    8: './dino_scripts/Dino_eight_genes.R',
+    9: './dino_scripts/Dino_nine_genes.R',
 }
 
 def main():

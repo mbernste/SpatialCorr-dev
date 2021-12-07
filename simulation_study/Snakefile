@@ -993,6 +993,7 @@ DSET_FIVE_CLUSTS_DIFF_CORR_0_1_HSP90AB1 = 'gene.HSP90AB1.corr_diff.0_1.condition
 DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1 = 'gene.HSP90AB1.corr_diff.0_2.condition.mult_clusts'
 DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1 = 'gene.HSP90AB1.corr_diff.0_4.condition.mult_clusts'
 DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1 = 'gene.HSP90AB1.corr_diff.0_6.condition.mult_clusts'
+DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1 = 'gene.HSP90AB1.corr_diff.0_8.condition.mult_clusts'
 
 rule generate_data_diff_corr_between_0_1_to_0_4_HSP90AB1_mult_clusts:
     output:
@@ -1007,15 +1008,21 @@ rule generate_data_diff_corr_between_0_1_to_0_4_HSP90AB1_mult_clusts:
         [
             f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}/{d_i}.tsv"
             for d_i in range(30) # 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30) # 30
         ]
     run:
         cmds=[
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1}",
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1}",
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}",
+            f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}",
             f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_2_HSP90AB1_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1}",
             f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_4_HSP90AB1_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1}",
-            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_6_HSP90AB1_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}"
+            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_6_HSP90AB1_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}",
+            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_8_HSP90AB1_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1034,6 +1041,10 @@ rule dino_normalize_diff_corr_between_0_1_to_0_4_HSP90AB1_mult_clusts:
         [
             f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     output:
         [
@@ -1047,15 +1058,21 @@ rule dino_normalize_diff_corr_between_0_1_to_0_4_HSP90AB1_mult_clusts:
         [
             f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     run:
         cmds=[
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1}",
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1}",
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}",
             f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1}",
             f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1}",
-            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}"
+            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}",
+            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1074,17 +1091,23 @@ rule run_test_sigma_5_condition_clust_test_bhr_diff_corr_between_0_1_to_0_4_HSP9
         [
             f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     output:
         diff_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.HSP90AB1.corr_diff.0_2.condition.mult_clusts.tsv",
         diff_0_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.HSP90AB1.corr_diff.0_4.condition.mult_clusts.tsv",
-        diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.HSP90AB1.corr_diff.0_6.condition.mult_clusts.tsv"
+        diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.HSP90AB1.corr_diff.0_6.condition.mult_clusts.tsv",
+        diff_0_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.HSP90AB1.corr_diff.0_8.condition.mult_clusts.tsv"
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}",
-            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}"
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_8}}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1103,6 +1126,7 @@ DSET_FIVE_CLUSTS_DIFF_CORR_0_1_S100A13 = 'gene.S100A13.corr_diff.0_1.condition.m
 DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13 = 'gene.S100A13.corr_diff.0_2.condition.mult_clusts'
 DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13 = 'gene.S100A13.corr_diff.0_4.condition.mult_clusts'
 DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13 = 'gene.S100A13.corr_diff.0_6.condition.mult_clusts'
+DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13 = 'gene.S100A13.corr_diff.0_8.condition.mult_clusts'
 
 rule generate_data_diff_corr_between_0_1_to_0_4_S100A13_mult_clusts:
     output:
@@ -1117,15 +1141,21 @@ rule generate_data_diff_corr_between_0_1_to_0_4_S100A13_mult_clusts:
         [
             f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}/{d_i}.tsv"
             for d_i in range(30) # 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}/{d_i}.tsv"
+            for d_i in range(30) # 30
         ]
     run:
         cmds=[
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13}",
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13}",
             f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}",
+            f"mkdir -p {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}",
             f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_2_S100A13_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13}",
             f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_4_S100A13_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13}",
-            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_6_S100A13_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}"
+            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_6_S100A13_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}",
+            f"python simulate_data_between_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_diff_means_diff_corr_0_8_S100A13_mult_clusts.per_clust_ests.json -o {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1145,6 +1175,10 @@ rule dino_normalize_diff_corr_between_0_1_to_0_4_S100A13_mult_clusts:
         [
             f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     output:
         [
@@ -1158,15 +1192,21 @@ rule dino_normalize_diff_corr_between_0_1_to_0_4_S100A13_mult_clusts:
         [
             f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     run:
         cmds=[
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13}",
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13}",
             f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}",
             f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13}",
             f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13}",
-            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}"
+            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}",
+            f"python run_dino.py {config['output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13} {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1185,17 +1225,23 @@ rule run_test_sigma_5_condition_clust_test_bhr_diff_corr_between_0_1_to_0_4_S100
         [
             f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13}/{d_i}.tsv"
             for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
         ]
     output:
         diff_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.S100A13.corr_diff.0_2.condition.mult_clusts.tsv",
         diff_0_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.S100A13.corr_diff.0_4.condition.mult_clusts.tsv",
-        diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.S100A13.corr_diff.0_6.condition.mult_clusts.tsv"
+        diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.S100A13.corr_diff.0_6.condition.mult_clusts.tsv",
+        diff_0_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.S100A13.corr_diff.0_8.condition.mult_clusts.tsv"
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}",
-            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}"
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_8}}"
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -1303,33 +1349,33 @@ rule dino_normalize_diff_corr_between_0_1_to_0_4_ILF2_mult_clusts:
 
 rule run_test_sigma_5_condition_clust_test_bhr_diff_corr_between_0_1_to_0_4_ILF2_mult_clusts:
     input:
-        #[
-        #    f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_ILF2}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
-        #[
-        #    f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_ILF2}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
-        #[
-        #    f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_ILF2}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
         [
             f"{config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_ILF2}/{d_i}.tsv"
             for d_i in range(30)
         ]
     output:
-        #diff_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_2.condition.mult_clusts.tsv",
-        #diff_0_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_4.condition.mult_clusts.tsv",
-        #diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_6.condition.mult_clusts.tsv",
+        diff_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_2.condition.mult_clusts.tsv",
+        diff_0_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_4.condition.mult_clusts.tsv",
+        diff_0_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_6.condition.mult_clusts.tsv",
         diff_0_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.ILF2.corr_diff.0_8.condition.mult_clusts.tsv"
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
-            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
-            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}",
-            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_4_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_4}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_6_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_6}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_FIVE_CLUSTS_DIFF_CORR_0_8_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -o {{output.diff_0_8}}"
         ]
         for c in cmds:
@@ -1470,6 +1516,669 @@ rule run_test_sigma_5_condition_clust_test_bhr_diff_corr_between_0_1_to_0_4_NDUF
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
+
+
+
+######################################################################################
+#   Simulate multiple genes. Test how the method performs as more genes are included
+#   in the anlaysis.
+######################################################################################
+
+DSET_MULT_GENES_9_CS_0_01_RPS10 = 'mg_9.gene_RPS10.sigma_10.cs_0.01'
+
+rule generate_data_multiple_genes_cs_0_05_three_to_seven_RPS10:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}",
+            f"python simulate_data_within_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_RPS10_mult_clusts_cs_0_01.json -o {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_05_three_to_seven_RPS10:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [   
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10} {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_05_three_to_seven_RPS10:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.2.gene.RPS10.cs.0_01.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.4.gene.RPS10.cs.0_01.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.6.gene.RPS10.cs.0_01.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.8.gene.RPS10.cs.0_01.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10} -f dino -n 2 -b 5 -t 10 -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10} -f dino -n 2 -b 5 -t 10 -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10} -f dino -n 2 -b 5 -t 10 -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_RPS10} -f dino -n 2 -b 5 -t 10 -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+######################################################################################
+#   Simulate multiple genes. Use gene HSP90AB1
+######################################################################################
+
+DSET_MULT_GENES_9_CS_0_01_HSP90AB1 = 'mg_9.gene_HSP90AB1.sigma_10.cs_0.01'
+
+rule generate_data_multiple_genes_cs_0_05_three_to_seven_HSP90AB1:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}",
+            f"python simulate_data_within_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_HSP90AB1_mult_clusts_cs_0_01.json -o {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_05_three_to_seven_HSP90AB1:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1} {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_05_three_to_seven_HSP90AB1:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.2.gene.HSP90AB1.cs.0_01.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.4.gene.HSP90AB1.cs.0_01.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.6.gene.HSP90AB1.cs.0_01.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.8.gene.HSP90AB1.cs.0_01.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1} -f dino -n 4 -b 5 -t 10 -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1} -f dino -n 4 -b 5 -t 10 -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1} -f dino -n 4 -b 5 -t 10 -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_HSP90AB1} -f dino -n 4 -b 5 -t 10 -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+######################################################################################
+#   Simulate multiple genes. Use gene S100A13
+######################################################################################
+
+DSET_MULT_GENES_9_CS_0_01_S100A13 = 'mg_9.gene_S100A13.sigma_10.cs_0.01'
+
+rule generate_data_multiple_genes_cs_0_05_three_to_seven_S100A13:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}",
+            f"python simulate_data_within_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_S100A13_mult_clusts_cs_0_01.json -o {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_05_three_to_seven_S100A13:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13} {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_05_three_to_seven_S100A13:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.2.gene.S100A13.cs.0_01.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.4.gene.S100A13.cs.0_01.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.6.gene.S100A13.cs.0_01.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.8.gene.S100A13.cs.0_01.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13} -f dino -n 2 -b 5 -t 10 -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13} -f dino -n 2 -b 5 -t 10 -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13} -f dino -n 2 -b 5 -t 10 -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_S100A13} -f dino -n 2 -b 5 -t 10 -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+######################################################################################
+#   Simulate multiple genes. Use gene ILF2
+######################################################################################
+
+DSET_MULT_GENES_9_CS_0_01_ILF2 = 'mg_9.gene_ILF2.sigma_10.cs_0.01'
+
+rule generate_data_multiple_genes_cs_0_05_three_to_seven_ILF2:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}",
+            f"python simulate_data_within_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_ILF2_mult_clusts_cs_0_01.json -o {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_05_three_to_seven_ILF2:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2} {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_05_three_to_seven_ILF2:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.2.gene.ILF2.cs.0_01.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.4.gene.ILF2.cs.0_01.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.6.gene.ILF2.cs.0_01.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.8.gene.ILF2.cs.0_01.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2} -f dino -n 2 -b 5 -t 10 -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2} -f dino -n 2 -b 5 -t 10 -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2} -f dino -n 2 -b 5 -t 10 -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_ILF2} -f dino -n 2 -b 5 -t 10 -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+######################################################################################
+#   Simulate multiple genes. Use gene NDUFS8
+######################################################################################
+
+DSET_MULT_GENES_9_CS_0_01_NDUFS8 = 'mg_9.gene_NDUFS8.sigma_10.cs_0.01'
+
+rule generate_data_multiple_genes_cs_0_05_three_to_seven_NDUFS8:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}",
+            f"python simulate_data_within_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_NDUFS8_mult_clusts_cs_0_01.json -o {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_cs_0_05_three_to_seven_NDUFS8:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8} {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_none_test_whr_multiple_genes_cs_0_05_three_to_seven_NDUFS8:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.2.gene.NDUFS8.cs.0_01.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.4.gene.NDUFS8.cs.0_01.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.6.gene.NDUFS8.cs.0_01.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-mg.8.gene.NDUFS8.cs.0_01.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8} -f dino -n 2 -b 5 -t 10 -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8} -f dino -n 2 -b 5 -t 10 -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8} -f dino -n 2 -b 5 -t 10 -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatial_corr_on_sim_mult_genes.py {config['dino_output_location']}/{DSET_MULT_GENES_9_CS_0_01_NDUFS8} -f dino -n 2 -b 5 -t 10 -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+
+######################################################################################
+#   Simulate multiple genes with static correlation within each region, but
+#   differing correlations between regions. Use gene RPS10.
+######################################################################################
+
+DSET_MULT_GENES_9_DIFF_0_2_RPS10 = 'mg_9.gene_RPS10.diff_0.2'
+
+rule generate_data_multiple_genes_diff_0_2_two_to_eight_RPS10:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}",
+            f"python simulate_data_between_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_RPS10_mult_clusts_diff_0_2.json -o {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_diff_0_2_two_to_eight_RPS10:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10} {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two_to_eight_RPS10:
+    input:
+        [   
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.2.gene.RPS10.diff.0_2.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.4.gene.RPS10.diff.0_2.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.6.gene.RPS10.diff.0_2.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.8.gene.RPS10.diff.0_2.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_RPS10} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+######################################################################################
+#   Simulate multiple genes with static correlation within each region, but
+#   differing correlations between regions. Use gene HSP90AB1.
+######################################################################################
+
+DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1 = 'mg_9.gene_HSP90AB1.diff_0.2'
+
+rule generate_data_multiple_genes_diff_0_2_two_to_eight_HSP90AB1:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}",
+            f"python simulate_data_between_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_HSP90AB1_mult_clusts_diff_0_2.json -o {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_diff_0_2_two_to_eight_HSP90AB1:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1} {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two_to_eight_HSP90AB1:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.2.gene.HSP90AB1.diff.0_2.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.4.gene.HSP90AB1.diff.0_2.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.6.gene.HSP90AB1.diff.0_2.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.8.gene.HSP90AB1.diff.0_2.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_HSP90AB1} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+######################################################################################
+#   Simulate multiple genes with static correlation within each region, but
+#   differing correlations between regions. Use gene S100A13.
+######################################################################################
+
+DSET_MULT_GENES_9_DIFF_0_2_S100A13 = 'mg_9.gene_S100A13.diff_0.2'
+
+rule generate_data_multiple_genes_diff_0_2_two_to_eight_S100A13:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}",
+            f"python simulate_data_between_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_S100A13_mult_clusts_diff_0_2.json -o {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_diff_0_2_two_to_eight_S100A13:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13} {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two_to_eight_S100A13:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.2.gene.S100A13.diff.0_2.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.4.gene.S100A13.diff.0_2.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.6.gene.S100A13.diff.0_2.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.8.gene.S100A13.diff.0_2.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_S100A13} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+######################################################################################
+#   Simulate multiple genes with static correlation within each region, but
+#   differing correlations between regions. Use gene ILF2.
+######################################################################################
+
+DSET_MULT_GENES_9_DIFF_0_2_ILF2 = 'mg_9.gene_ILF2.diff_0.2'
+
+rule generate_data_multiple_genes_diff_0_2_two_to_eight_ILF2:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}",
+            f"python simulate_data_between_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_ILF2_mult_clusts_diff_0_2.json -o {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_diff_0_2_two_to_eight_ILF2:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2} {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two_to_eight_ILF2:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.2.gene.ILF2.diff.0_2.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.4.gene.ILF2.diff.0_2.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.6.gene.ILF2.diff.0_2.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.8.gene.ILF2.diff.0_2.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_ILF2} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+######################################################################################
+#   Simulate multiple genes with static correlation within each region, but
+#   differing correlations between regions. Use gene NDUFS8.
+######################################################################################
+
+DSET_MULT_GENES_9_DIFF_0_2_NDUFS8 = 'mg_9.gene_NDUFS8.diff_0.2'
+
+rule generate_data_multiple_genes_diff_0_2_two_to_eight_NDUFS8:
+    output:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}",
+            f"python simulate_data_between_mult_genes_est_condition.py -s spotwise -n 30 -i {config['simulation_configs']}/sim_config_mult_genes_9_NDUFS8_mult_clusts_diff_0_2.json -o {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_multiple_genes_diff_0_2_two_to_eight_NDUFS8:
+    input:
+        [
+            f"{config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30) # TODO change to 30
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}",
+            f"python run_dino.py -g 9 {config['output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8} {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two_to_eight_NDUFS8:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+    output:
+        genes_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.2.gene.NDUFS8.diff.0_2.condition.mult_clusts.tsv",
+        genes_4=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.4.gene.NDUFS8.diff.0_2.condition.mult_clusts.tsv",
+        genes_6=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.6.gene.NDUFS8.diff.0_2.condition.mult_clusts.tsv",
+        genes_8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-mg.8.gene.NDUFS8.diff.0_2.condition.mult_clusts.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 2 -o {{output.genes_2}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 4 -o {{output.genes_4}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 6 -o {{output.genes_6}}",
+            f"python run_spatialcorr_on_sim_mult_genes_between.py {config['dino_output_location']}/{DSET_MULT_GENES_9_DIFF_0_2_NDUFS8} -f dino -n 5 -b 5 -t 10 -w -c cluster -m 8 -o {{output.genes_8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+
+
+
+
+
+
+
 
 #################################### OLD 1 #######################################3
 

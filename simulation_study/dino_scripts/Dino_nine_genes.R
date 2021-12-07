@@ -1,0 +1,55 @@
+#!/usr/bin/env Rscript
+
+##################
+## Install Dino ##
+##################
+
+# devtools::install_github("JBrownBiostat/Dino", build_vignettes = FALSE)
+
+
+###############
+## Libraries ##
+###############
+library(Dino)
+
+
+##########
+## Data ##
+##########
+## Script requires 2 shell arguments:
+## 1) location of the file to normalize
+## 2) directory including file name in which to save the normalized data
+args <- commandArgs(trailingOnly=TRUE)
+
+## source .tsv location ##
+rawDat <- read.table(args[1], sep = "\t", header = TRUE)
+
+## save directory ##
+saveDir <- args[2]
+
+
+###############
+## Normalize ##
+###############
+sizeVec <- log(rawDat$size_factors)
+sizeVec <- sizeVec - median(sizeVec)
+normDat <- rbind(t(rawDat[, c("count_gene_0", "count_gene_1", "count_gene_2", "count_gene_3", "count_gene_4", "count_gene_5", "count_gene_6", "count_gene_7", "count_gene_8")]), 1)
+colnames(normDat) <- rawDat$X
+rownames(normDat) <- c("Gene_1", "Gene_2", "Gene_3", "Gene_4", "Gene_5", "Gene_6", "Gene_7", "Gene_8", "Gene_9", "Null_Gene")
+normDat <- Dino(normDat, depth = sizeVec, slope = 1, nCores = 1)
+
+rawDat$dino_gene_0 <- normDat[1, ]
+rawDat$dino_gene_1 <- normDat[2, ]
+rawDat$dino_gene_2 <- normDat[3, ]
+rawDat$dino_gene_3 <- normDat[4, ]
+rawDat$dino_gene_4 <- normDat[5, ]
+rawDat$dino_gene_5 <- normDat[6, ]
+rawDat$dino_gene_6 <- normDat[7, ]
+rawDat$dino_gene_7 <- normDat[8, ]
+rawDat$dino_gene_8 <- normDat[9, ]
+
+##########
+## Save ##
+##########
+write.table(rawDat, file = saveDir, row.names=FALSE, sep="\t", quote=FALSE)
+
