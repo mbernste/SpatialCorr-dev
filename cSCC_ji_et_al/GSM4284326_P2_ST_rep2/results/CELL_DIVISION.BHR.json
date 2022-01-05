@@ -1,0 +1,164 @@
+{
+ "gene_set_to_genes": {
+  "GO_CELL_DIVISION": [
+   "CALM1",
+   "CALM2",
+   "CDC42",
+   "CFL1",
+   "GNAI2",
+   "MYH9",
+   "PPP1CA",
+   "RACK1",
+   "RAN",
+   "RHOA",
+   "RPS3",
+   "SFN",
+   "TUBB",
+   "YBX1",
+   "ZFP36L2"
+  ],
+  "GO_ASYMMETRIC_CELL_DIVISION": [
+   "ACTR2",
+   "ACTR3",
+   "ARHGEF2",
+   "GOLGA2",
+   "PARD3",
+   "RAB10",
+   "RGS14",
+   "TEAD3"
+  ],
+  "GO_STEM_CELL_DIVISION": [
+   "AKNA",
+   "ARHGEF2",
+   "FGFR1",
+   "GNL3",
+   "LBH",
+   "NCOA3",
+   "NOTCH1",
+   "NUMB",
+   "PAFAH1B1",
+   "RAB10",
+   "SFRP2",
+   "TEAD3",
+   "TIAL1",
+   "WWTR1",
+   "ZFP36L2"
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": [
+   "CAT",
+   "CDC25B",
+   "CDC42",
+   "GIPC1",
+   "ITGB1BP1",
+   "LBH",
+   "NUP62",
+   "PGF",
+   "PKN2",
+   "RHOA",
+   "SIRT2",
+   "TGFB1",
+   "VEGFA",
+   "VEGFB",
+   "YBX1"
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   "C10orf99",
+   "CALM1",
+   "CALM2",
+   "CDC25B",
+   "CDC42",
+   "CIB1",
+   "GIPC1",
+   "RAB11A",
+   "RACK1",
+   "RHOA",
+   "SFN",
+   "SFRP2",
+   "TP63",
+   "TXNIP",
+   "YBX1"
+  ],
+  "GO_SOMATIC_STEM_CELL_DIVISION": [
+   "AKNA",
+   "ARHGEF2",
+   "FGFR1",
+   "FGFR2",
+   "LBH",
+   "NOTCH1",
+   "NUMB",
+   "RAB10",
+   "TEAD3",
+   "ZFP36L2"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_CELL_DIVISION": 0.8,
+  "GO_ASYMMETRIC_CELL_DIVISION": 0.7407407407407407,
+  "GO_STEM_CELL_DIVISION": 0.3508771929824561,
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": 0.29850746268656714,
+  "GO_REGULATION_OF_CELL_DIVISION": 0.14285714285714285,
+  "GO_SOMATIC_STEM_CELL_DIVISION": 0.24691358024691357
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_ASYMMETRIC_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "GO_STEM_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_POSITIVE_REGULATION_OF_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_REGULATION_OF_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_SOMATIC_STEM_CELL_DIVISION": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ }
+}

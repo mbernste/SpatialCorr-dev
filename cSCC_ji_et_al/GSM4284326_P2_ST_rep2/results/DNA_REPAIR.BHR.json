@@ -1,0 +1,165 @@
+{
+ "gene_set_to_genes": {
+  "GO_NEGATIVE_REGULATION_OF_DNA_REPAIR": [
+   "HSF1",
+   "MAD2L2",
+   "NUDT16L1",
+   "OTUB1",
+   "RIF1",
+   "RNF169",
+   "RPS3",
+   "SMCHD1",
+   "TFIP11",
+   "TRIP12",
+   "TWIST1",
+   "UBQLN4",
+   "UBR5"
+  ],
+  "GO_REGULATION_OF_DNA_REPAIR": [
+   "ACTR2",
+   "DEK",
+   "DHX9",
+   "EGFR",
+   "FUS",
+   "HMGB1",
+   "OTUB1",
+   "PCNA",
+   "PPP4C",
+   "PRKDC",
+   "RPS3",
+   "TRIM28",
+   "TRIP12",
+   "UBE2N",
+   "UBE2V2"
+  ],
+  "GO_DNA_REPAIR": [
+   "ACTR2",
+   "HMGB1",
+   "MORF4L1",
+   "NPM1",
+   "NUCKS1",
+   "PARK7",
+   "POLR2L",
+   "RPS27A",
+   "RPS3",
+   "SFPQ",
+   "UBA52",
+   "UBC",
+   "UBE2D3",
+   "VCP",
+   "XRCC5"
+  ],
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": [
+   "ACTR2",
+   "CEBPG",
+   "DHX9",
+   "DTX3L",
+   "EGFR",
+   "FUS",
+   "HMGB1",
+   "MMS19",
+   "PARP1",
+   "PCNA",
+   "PRKDC",
+   "RPS3",
+   "TRIM28",
+   "UBE2N",
+   "UBE2V2"
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   "FAAP20",
+   "ISG15",
+   "NPLOC4",
+   "PCNA",
+   "POLD2",
+   "RPA1",
+   "RPA2",
+   "RPA3",
+   "RPS27A",
+   "UBA52",
+   "UBB",
+   "UBC",
+   "UBE2L6",
+   "VCP",
+   "WRNIP1"
+  ],
+  "GO_DNA_DEALKYLATION_INVOLVED_IN_DNA_REPAIR": [
+   "ALKBH3",
+   "ALKBH5",
+   "ASCC2",
+   "ASCC3",
+   "MGMT",
+   "MPG"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_NEGATIVE_REGULATION_OF_DNA_REPAIR": 0.9523809523809523,
+  "GO_REGULATION_OF_DNA_REPAIR": 0.2127659574468085,
+  "GO_DNA_REPAIR": 0.625,
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": 0.7407407407407407,
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": 0.6451612903225806,
+  "GO_DNA_DEALKYLATION_INVOLVED_IN_DNA_REPAIR": 0.8
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_NEGATIVE_REGULATION_OF_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_REGULATION_OF_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   6,
+   7,
+   8
+  ],
+  "GO_POSITIVE_REGULATION_OF_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_DNA_SYNTHESIS_INVOLVED_IN_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "GO_DNA_DEALKYLATION_INVOLVED_IN_DNA_REPAIR": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ]
+ }
+}
