@@ -18,6 +18,7 @@ python run_whr_test.py -c -n 11 -g gene_set_groups/interleukin_related.tsv -o re
 python run_whr_test.py -c -n 11 -g gene_set_groups/angiogenesis_related.tsv -o results/ANGIOGENESIS_RELATED.WHR.json
 python run_whr_test.py -c -n 11 -g gene_set_groups/epidermis_development_related.tsv -o results/EPIDERMIS_DEVELOPMENT.WHR.json
 python run_whr_test.py -c -n 11 -g gene_set_groups/fibroblast_related.tsv -o results/FIBROBLAST.WHR.json
+python run_whr_test.py -c -n 11 -g gene_set_groups/cell_cycle_related.tsv -o results/CELL_CYCLE.WHR.json
 
 # BHR-Test
 python run_bhr_test.py -c -n 11 -g gene_set_groups/keratinocyte_related.tsv -o results/GO_KERATINOCYTE_DIFFERENTIATION.BHR.json
@@ -38,4 +39,7 @@ python run_bhr_test.py -c -n 11 -g gene_set_groups/interferon_related.tsv -o res
 python run_bhr_test.py -c -n 11 -g gene_set_groups/interleukin_related.tsv -o results/INTERLEUKIN_RELATED.BHR.json
 python run_bhr_test.py -c -n 11 -g gene_set_groups/angiogenesis_related.tsv -o results/ANGIOGENESIS_RELATED.BHR.json
 python run_bhr_test.py -c -n 11 -g gene_set_groups/epidermis_development_related.tsv -o results/EPIDERMIS_DEVELOPMENT.BHR.json
+python run_bhr_test.py -c -n 11 -g gene_set_groups/fibroblast_related.tsv -o results/FIBROBLAST.BHR.json
+python run_bhr_test.py -c -n 11 -g gene_set_groups/cell_cycle_related.tsv -o results/CELL_CYCLE.BHR.json
+
 

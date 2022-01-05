@@ -1,0 +1,128 @@
+{
+ "gene_set_to_genes": {
+  "GO_POSITIVE_REGULATION_OF_FIBROBLAST_PROLIFERATION": [
+   "ANXA2",
+   "CD74",
+   "EGFR",
+   "FOSL2",
+   "GAS6",
+   "PRKDC",
+   "S100A6"
+  ],
+  "GO_RESPONSE_TO_FIBROBLAST_GROWTH_FACTOR": [
+   "CD44",
+   "COL1A1",
+   "CTNNB1",
+   "ESRP1",
+   "FGFBP1",
+   "FGFR3",
+   "GPC1",
+   "HNRNPA1",
+   "HNRNPF",
+   "HNRNPH1",
+   "HNRNPM",
+   "POLR2L",
+   "PTBP1",
+   "ZFP36L1",
+   "ZFP36L2"
+  ],
+  "GO_REGULATION_OF_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": [
+   "CTNNB1",
+   "FGFBP1",
+   "GATA3",
+   "GPC1",
+   "NPTN",
+   "SULF2"
+  ],
+  "GO_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": [
+   "CTNNB1",
+   "ESRP1",
+   "FGFBP1",
+   "FGFR3",
+   "GATA3",
+   "GPC1",
+   "HNRNPA1",
+   "HNRNPF",
+   "HNRNPH1",
+   "HNRNPM",
+   "IQGAP1",
+   "MAPK3",
+   "POLR2A",
+   "POLR2L",
+   "PTBP1"
+  ],
+  "GO_FIBROBLAST_PROLIFERATION": [
+   "ANXA2",
+   "CD74",
+   "CTNNB1",
+   "EGFR",
+   "EMD",
+   "FOSL2",
+   "FTH1",
+   "GAS6",
+   "GSTP1",
+   "PRKDC",
+   "S100A6"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_POSITIVE_REGULATION_OF_FIBROBLAST_PROLIFERATION": 0.28169014084507044,
+  "GO_RESPONSE_TO_FIBROBLAST_GROWTH_FACTOR": 0.3225806451612903,
+  "GO_REGULATION_OF_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": 0.0881057268722467,
+  "GO_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": 0.2631578947368421,
+  "GO_FIBROBLAST_PROLIFERATION": 0.5263157894736842
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_keep_clusts": {
+  "GO_POSITIVE_REGULATION_OF_FIBROBLAST_PROLIFERATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_RESPONSE_TO_FIBROBLAST_GROWTH_FACTOR": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_REGULATION_OF_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_FIBROBLAST_GROWTH_FACTOR_RECEPTOR_SIGNALING_PATHWAY": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "GO_FIBROBLAST_PROLIFERATION": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ]
+ }
+}
