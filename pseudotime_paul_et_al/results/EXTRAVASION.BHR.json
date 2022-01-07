@@ -1,0 +1,58 @@
+{
+ "gene_set_to_genes": {
+  "GO_CELLULAR_EXTRAVASATION": [
+   "Add2",
+   "Elane",
+   "Itgb1",
+   "Pik3cd",
+   "Prtn3",
+   "Ripk3",
+   "Sell",
+   "Selplg",
+   "Spn"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_CELLULAR_EXTRAVASATION": 0.0001
+ },
+ "gene_set_to_pairwise_pvals": {
+  "GO_CELLULAR_EXTRAVASATION": {
+   "Add2,Elane": 0.03,
+   "Add2,Itgb1": 0.7142857142857143,
+   "Add2,Pik3cd": 0.02,
+   "Add2,Prtn3": 0.08,
+   "Add2,Ripk3": 0.3389830508474576,
+   "Add2,Sell": 0.01,
+   "Add2,Selplg": 0.05,
+   "Add2,Spn": 0.08,
+   "Elane,Itgb1": 1.0,
+   "Elane,Pik3cd": 0.3508771929824561,
+   "Elane,Prtn3": 0.01,
+   "Elane,Ripk3": 0.9090909090909091,
+   "Elane,Sell": 0.5714285714285714,
+   "Elane,Selplg": 0.7407407407407407,
+   "Elane,Spn": 0.9090909090909091,
+   "Itgb1,Pik3cd": 0.16,
+   "Itgb1,Prtn3": 0.5128205128205128,
+   "Itgb1,Ripk3": 0.3508771929824561,
+   "Itgb1,Sell": 0.7692307692307693,
+   "Itgb1,Selplg": 0.9523809523809523,
+   "Itgb1,Spn": 0.47619047619047616,
+   "Pik3cd,Prtn3": 0.9090909090909091,
+   "Pik3cd,Ripk3": 0.8695652173913043,
+   "Pik3cd,Sell": 0.9523809523809523,
+   "Pik3cd,Selplg": 0.9090909090909091,
+   "Pik3cd,Spn": 0.8695652173913043,
+   "Prtn3,Ripk3": 0.9090909090909091,
+   "Prtn3,Sell": 0.625,
+   "Prtn3,Selplg": 0.13,
+   "Prtn3,Spn": 0.8333333333333334,
+   "Ripk3,Sell": 0.425531914893617,
+   "Ripk3,Selplg": 0.5128205128205128,
+   "Ripk3,Spn": 0.21505376344086022,
+   "Sell,Selplg": 0.3225806451612903,
+   "Sell,Spn": 1.0,
+   "Selplg,Spn": 0.12
+  }
+ }
+}

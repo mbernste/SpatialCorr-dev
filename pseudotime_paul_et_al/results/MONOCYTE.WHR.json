@@ -1,0 +1,16 @@
+{
+ "gene_set_to_genes": {
+  "GO_REGULATION_OF_MONOCYTE_DIFFERENTIATION": [
+   "Acin1",
+   "Fes",
+   "Foxp1",
+   "Inpp5d",
+   "Myc"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_REGULATION_OF_MONOCYTE_DIFFERENTIATION": 0.7407407407407407
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_pairwise_clust_to_pval": {}
+}

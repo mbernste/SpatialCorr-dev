@@ -1,0 +1,26 @@
+{
+ "gene_set_to_genes": {
+  "GO_HEMATOPOIETIC_STEM_CELL_DIFFERENTIATION": [
+   "Lmo2",
+   "Myb",
+   "Psma7",
+   "Psmb1",
+   "Psmb10",
+   "Psmb2",
+   "Psmb4",
+   "Psmb6",
+   "Psmb8",
+   "Psmc2",
+   "Psmc3",
+   "Psmd1",
+   "Psmd4",
+   "Psmd7",
+   "Psme1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_HEMATOPOIETIC_STEM_CELL_DIFFERENTIATION": 0.8695652173913043
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_pairwise_clust_to_pval": {}
+}

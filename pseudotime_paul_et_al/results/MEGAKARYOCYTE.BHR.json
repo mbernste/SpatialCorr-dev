@@ -1,0 +1,47 @@
+{
+ "gene_set_to_genes": {
+  "GO_REGULATION_OF_MEGAKARYOCYTE_DIFFERENTIATION": [
+   "Gata1",
+   "Gata2",
+   "Hmgb2",
+   "Nfe2",
+   "Runx1",
+   "Setd1a",
+   "Tnrc6a",
+   "Tnrc6b",
+   "Zfpm1"
+  ],
+  "GO_MEGAKARYOCYTE_DEVELOPMENT": [
+   "Kit",
+   "Pip4k2a",
+   "Ptpn11",
+   "Ptpn6",
+   "Tal1",
+   "Wasf2",
+   "Zfpm1"
+  ],
+  "GO_MEGAKARYOCYTE_DIFFERENTIATION": [
+   "Gata1",
+   "Gata2",
+   "Hmgb2",
+   "Kit",
+   "Nfe2",
+   "Pip4k2a",
+   "Ptpn11",
+   "Ptpn6",
+   "Runx1",
+   "Setd1a",
+   "Tal1",
+   "Tnrc6a",
+   "Tnrc6b",
+   "Wasf2",
+   "Zfpm1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_REGULATION_OF_MEGAKARYOCYTE_DIFFERENTIATION": 1.0,
+  "GO_MEGAKARYOCYTE_DEVELOPMENT": 0.37735849056603776,
+  "GO_MEGAKARYOCYTE_DIFFERENTIATION": 1.0
+ },
+ "gene_set_to_pairwise_pvals": {}
+}

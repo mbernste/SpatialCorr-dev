@@ -1,0 +1,57 @@
+{
+ "gene_set_to_genes": {
+  "GO_POSITIVE_REGULATION_OF_PHAGOCYTOSIS": [
+   "Calr",
+   "Cyba",
+   "Dock2",
+   "Fcer1g",
+   "Gata2",
+   "Lman2",
+   "Lyar",
+   "Pycard",
+   "Rab27a",
+   "Sod1"
+  ],
+  "GO_REGULATION_OF_PHAGOCYTOSIS": [
+   "Calr",
+   "Csk",
+   "Cyba",
+   "Dock2",
+   "Fcer1g",
+   "Gata2",
+   "Lman2",
+   "Lyar",
+   "Prtn3",
+   "Pycard",
+   "Rab27a",
+   "Snx3",
+   "Sod1",
+   "Sphk1",
+   "Syk"
+  ],
+  "GO_PHAGOCYTOSIS": [
+   "Actb",
+   "Arpc2",
+   "Arpc4",
+   "Calr",
+   "Coro1a",
+   "Csk",
+   "Elane",
+   "Hsp90ab1",
+   "Lman2",
+   "Lyar",
+   "Prtn3",
+   "Rac2",
+   "Rhog",
+   "Snx3",
+   "Sod1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_POSITIVE_REGULATION_OF_PHAGOCYTOSIS": 0.9523809523809523,
+  "GO_REGULATION_OF_PHAGOCYTOSIS": 0.9090909090909091,
+  "GO_PHAGOCYTOSIS": 0.5
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_pairwise_clust_to_pval": {}
+}

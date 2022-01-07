@@ -1,0 +1,62 @@
+{
+ "gene_set_to_genes": {
+  "GO_POSITIVE_REGULATION_OF_ERYTHROCYTE_DIFFERENTIATION": [
+   "Gata1",
+   "Gata2",
+   "Hmgb2",
+   "Inpp5d",
+   "Mapk14",
+   "Smap1",
+   "Stat1",
+   "Stat3",
+   "Stat5b",
+   "Tal1"
+  ],
+  "GO_ERYTHROCYTE_HOMEOSTASIS": [
+   "Acin1",
+   "Add1",
+   "Gata1",
+   "Hmgb2",
+   "Inpp5d",
+   "Klf1",
+   "Klf13",
+   "Ldb1",
+   "Lyar",
+   "Mapk14",
+   "Rps19",
+   "Sfxn1",
+   "Tmem14c",
+   "Zbtb7a",
+   "Zfpm1"
+  ],
+  "GO_REGULATION_OF_ERYTHROCYTE_DIFFERENTIATION": [
+   "Gata1",
+   "Gata2",
+   "Hmgb2",
+   "Inpp5d",
+   "Klf13",
+   "Ldb1",
+   "Mapk14",
+   "Smap1",
+   "Stat1",
+   "Stat3",
+   "Stat5b",
+   "Tal1",
+   "Zfpm1"
+  ],
+  "GO_ERYTHROCYTE_DEVELOPMENT": [
+   "Gata1",
+   "Lyar",
+   "Rhag",
+   "Tal1",
+   "Zbtb7a"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_POSITIVE_REGULATION_OF_ERYTHROCYTE_DIFFERENTIATION": 1.0,
+  "GO_ERYTHROCYTE_HOMEOSTASIS": 0.7692307692307693,
+  "GO_REGULATION_OF_ERYTHROCYTE_DIFFERENTIATION": 1.0,
+  "GO_ERYTHROCYTE_DEVELOPMENT": 0.5882352941176471
+ },
+ "gene_set_to_pairwise_pvals": {}
+}

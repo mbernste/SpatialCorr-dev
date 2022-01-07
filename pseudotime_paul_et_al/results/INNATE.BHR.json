@@ -1,0 +1,69 @@
+{
+ "gene_set_to_genes": {
+  "GO_NEGATIVE_REGULATION_OF_INNATE_IMMUNE_RESPONSE": [
+   "Grn",
+   "Lgals9",
+   "Rps19",
+   "Samhd1",
+   "Ttll12"
+  ],
+  "GO_INNATE_IMMUNE_RESPONSE_ACTIVATING_CELL_SURFACE_RECEPTOR_SIGNALING_PATHWAY": [
+   "Psma7",
+   "Psmb1",
+   "Psmb10",
+   "Psmb2",
+   "Psmb4",
+   "Psmb6",
+   "Psmb8",
+   "Psmc1",
+   "Psmc2",
+   "Psmc3",
+   "Psmd1",
+   "Psmd3",
+   "Psmd4",
+   "Psmd7",
+   "Psme1"
+  ],
+  "GO_INNATE_IMMUNE_RESPONSE": [
+   "C1qbp",
+   "Cdc37",
+   "Ddx21",
+   "Hsp90ab1",
+   "Hsp90b1",
+   "Psma7",
+   "Psmb1",
+   "Psmb4",
+   "Psmb6",
+   "Psmb8",
+   "Psmc3",
+   "Rpl13a",
+   "Rps19",
+   "Trim28",
+   "Ubb"
+  ],
+  "GO_ACTIVATION_OF_INNATE_IMMUNE_RESPONSE": [
+   "C1qbp",
+   "Hsp90b1",
+   "Hspd1",
+   "Psma7",
+   "Psmb1",
+   "Psmb4",
+   "Psmb6",
+   "Psmb8",
+   "Psmc2",
+   "Psmc3",
+   "Psmd1",
+   "Psmd4",
+   "Psmd7",
+   "Sfpq",
+   "Ubb"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_NEGATIVE_REGULATION_OF_INNATE_IMMUNE_RESPONSE": 0.16260162601626016,
+  "GO_INNATE_IMMUNE_RESPONSE_ACTIVATING_CELL_SURFACE_RECEPTOR_SIGNALING_PATHWAY": 0.3508771929824561,
+  "GO_INNATE_IMMUNE_RESPONSE": 0.6896551724137931,
+  "GO_ACTIVATION_OF_INNATE_IMMUNE_RESPONSE": 0.29411764705882354
+ },
+ "gene_set_to_pairwise_pvals": {}
+}

@@ -1,0 +1,21 @@
+{
+ "gene_set_to_genes": {
+  "GO_NEUTROPHIL_MIGRATION": [
+   "C1qbp",
+   "Fcer1g",
+   "Lbp",
+   "Pik3cd",
+   "Prtn3",
+   "Rac2",
+   "Rhog",
+   "Syk",
+   "Vav1",
+   "Wdr1"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_NEUTROPHIL_MIGRATION": 0.18518518518518517
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_pairwise_clust_to_pval": {}
+}

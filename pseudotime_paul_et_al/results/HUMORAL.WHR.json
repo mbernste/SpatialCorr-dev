@@ -1,0 +1,30 @@
+{
+ "gene_set_to_genes": {
+  "GO_ANTIMICROBIAL_HUMORAL_RESPONSE": [
+   "Ctsg",
+   "Elane",
+   "Prtn3",
+   "Romo1",
+   "Rps19",
+   "Slpi"
+  ],
+  "GO_HUMORAL_IMMUNE_RESPONSE": [
+   "C1qbp",
+   "Cd81",
+   "Ctsg",
+   "Elane",
+   "Prtn3",
+   "Psmb10",
+   "Ptpn6",
+   "Romo1",
+   "Rps19",
+   "Slpi"
+  ]
+ },
+ "gene_set_to_pval": {
+  "GO_ANTIMICROBIAL_HUMORAL_RESPONSE": 0.18518518518518517,
+  "GO_HUMORAL_IMMUNE_RESPONSE": 0.23809523809523808
+ },
+ "gene_set_to_pairwise_pvals": {},
+ "gene_set_to_pairwise_clust_to_pval": {}
+}
