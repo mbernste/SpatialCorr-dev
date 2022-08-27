@@ -32,70 +32,351 @@ rule all:
          
 
 
-############################################################################
-# Null samples based on CALML5 and CALML5 in which correlation at all spots 
-# is zero. No changes in mean expression across the slide. Note, we are 
-# considering five distinct regions.
-#############################################################################
+##############################################################################
+# Null data in which there is no changing correlation anywhere on the slide.
+# Create null data for several genes.
+##############################################################################
 
-rule generate_data_sigma_10_cs_0_0_CALML5_CALML5_condition_mult_clusts:
+DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS = 'gene.all_HSP90AB1.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats'
+DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats' 
+DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS = 'gene.all_S100A13.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats'
+DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS = 'gene.all_ILF2.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats'
+DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS = 'gene.all_NDUFS8.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats'
+
+rule generate_data_sigma_10_cs_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
     output:
         [
-            f"{config['output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts/{d_i}.tsv"
+            f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(200)
+        ],
+        [
+            f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200) # 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200) # 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200) # 30
+        ],
+        [
+            f"{config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200) # 30
         ]
     run:
         cmds=[
-            f"mkdir -p {config['output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts",
-            f"python simulate_data_within_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts.cs_0_0.json -s spotwise -n 200 -o {config['output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts",
+            f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_0.per_clust_ests.json -s spotwise -n 200 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_RPS10.cs_0_0.per_clust_ests.json -s spotwise -n 200 -o {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_S100A13.cs_0_0.per_clust_ests.json -s spotwise -n 200 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_ILF2.cs_0_0.per_clust_ests.json -s spotwise -n 200 -o {config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_NDUFS8.cs_0_0.per_clust_ests.json -s spotwise -n 200 -o {config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
         ]
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
 
-rule dino_normalize_sigma_10_cs_0_0_CALML5_CALML5_condition_mult_clusts:
+rule dino_normalize_sigma_10_cs_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
     input:
         [
-            f"{config['output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts/{d_i}.tsv"
-            for d_i in range(200)
+            f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
         ]
     output:
         [
-            f"{config['dino_output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts/{d_i}.tsv"
-            for d_i in range(200)
+            f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
         ]
     run:
         cmds=[
-            f"mkdir -p {config['dino_output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts",
-            f"python run_dino.py {config['output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts {config['dino_output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts"
+            f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_dino.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_dino.py {config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_dino.py {config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}"
         ]
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
 
-rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0_CALML5_CALML5_condition_mult_clusts:
+rule run_test_sigma_10_cs_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
     input:
         [
-            f"{config['dino_output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts/{d_i}.tsv"
-            for d_i in range(200)
+            f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
         ]
     output:
-        f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts.tsv"
+        out_HSP90AB1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_HSP90AB1.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_RPS10=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_S100A13=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_ILF2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_ILF2.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_NDUFS8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_NDUFS8.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv"
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
-            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/gene.all_CALML5.sigma.10.cs.0_0.condition.mult_clusts -c cluster -f dino -n 20 -b 5 -t 10 -o {{output}}"
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_HSP90AB1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_RPS10}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_S100A13}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_ILF2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_NDUFS8}}"
         ]
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
 
-#############################################################################
-# Null samples based on PECAM1 and PECAM1 in which correlation at all spots 
-# is zero. No changes in mean expression across the slide.
-#############################################################################
+# BR-test on null samples
+rule run_test_sigma_10_diff_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        out_HSP90AB1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.all_HSP90AB1.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_RPS10=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.all_RPS10.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_S100A13=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.all_S100A13.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_ILF2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.all_ILF2.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        out_NDUFS8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.between.features.dino-gene.all_NDUFS8.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -w -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_HSP90AB1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -w -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_RPS10}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -w -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_S100A13}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -w -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_ILF2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -w -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_NDUFS8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
 
-#### TODO
+#### Try normalizing using other methods
+
+rule log1cpm_normalize_sigma_10_cs_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        #[
+        #    f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        #[
+        #    f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        [
+            f"{config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        #[
+        #    f"{config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #]
+    output:
+        [
+            f"{config['log1cpm_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        [
+            f"{config['log1cpm_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #]
+    run:
+        cmds=[
+            f"mkdir -p {config['log1cpm_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"mkdir -p {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"mkdir -p {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_log1cpm.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['log1cpm_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_log1cpm.py {config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['log1cpm_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            #f"python run_dino.py {config['output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_10_cs_0_0_feats_log1cpm_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['log1cpm_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ]
+        #[
+        #    f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #],
+        #[
+        #    f"{config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+        #    for d_i in range(3)
+        #]
+    output:
+        out_HSP90AB1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.log1cpm-gene.all_HSP90AB1.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv"
+        #out_RPS10=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        #out_S100A13=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        #out_ILF2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_ILF2.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv",
+        #out_NDUFS8=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_NDUFS8.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['log1cpm_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f log1cpm -n 20 -b 5 -t 10 -p 200 -o {{output.out_HSP90AB1}}"
+            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_RPS10}}",
+            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_S100A13}}",
+            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_ILF2}}",
+            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_NDUFS8_NDUFS8_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -p 200 -o {{output.out_NDUFS8}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+#### Test deviance residuals
+
+rule bindevres_normalize_sigma_10_cs_0_0_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+    output:
+        [
+            f"{config['bindevres_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['bindevres_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['bindevres_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"mkdir -p {config['bindevres_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_bindevres.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['bindevres_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}",
+            f"python run_bindevres.py {config['output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} {config['bindevres_output_location']}/{DSET_ILF2_ILF2_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_10_cs_0_0_feats_bindevres_HSP90AB1_RPS10_S100A13_ILF2_NDUFS8_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['bindevres_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ]
+    output:
+        out_HSP90AB1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.bindevres-gene.all_HSP90AB1.sigma.10.cs.0_0.condition.mult_clusts.per_clust_stats.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['bindevres_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_0_COND_MULT_PER_CLUST_STATS} -c cluster -f dev_res -n 20 -b 5 -t 10 -p 200 -o {{output.out_HSP90AB1}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
 
 
 ############################################################################
@@ -114,10 +395,6 @@ DSET_HSP90AB1_HSP90AB1_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS = 'gene.all_HSP90AB
 
 rule generate_data_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_per_clust_stats:
     output:
-        #[
-        #    f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
         [
             f"{config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(30)
@@ -136,12 +413,10 @@ rule generate_data_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_p
         ]
     run:
         cmds=[
-            #f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}",
-            #f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_025.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_05.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_1.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_2.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
@@ -174,10 +449,6 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_
             for d_i in range(30)
         ]
     output:
-        #[
-        #    f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
         [
             f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(30)
@@ -196,12 +467,10 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_
         ]
     run:
         cmds=[
-            #f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}",
-            #f"python run_dino.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
@@ -213,10 +482,6 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_
 
 rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_HSP90AB1_HSP90AB1_cond_mult_clusts_per_clust_stats:
     input:
-        #[
-        #    f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(3)
-        #],
         [
             f"{config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(3)
@@ -234,7 +499,6 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_HSP90AB1_
             for d_i in range(3)
         ]
     output:
-        #out_0_025=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_HSP90AB1_HSP90AB1.sigma.10.cs.0_025.condition.mult_clusts.per_clust_stats.tsv",
         out_0_05=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_HSP90AB1_HSP90AB1.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
         out_0_1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_HSP90AB1_HSP90AB1.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
         out_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_HSP90AB1_HSP90AB1.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
@@ -242,7 +506,6 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_HSP90AB1_
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
-            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_025}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_05}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_1}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_2}}",
@@ -296,7 +559,6 @@ rule run_test_sigma_10_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_HSP90AB1
 # across the slide. The slide is divided into five clusters.
 #############################################################################
 
-#DSET_RPS10_RPS10_S_10_CS_0_0025_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.10.cs.0_0025.condition.mult_clusts.per_clust_stats'
 DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.10.cs.0_025.condition.mult_clusts.per_clust_stats'
 DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats'
 DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats'
@@ -305,10 +567,6 @@ DSET_RPS10_RPS10_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS = 'gene.all_RPS10.sigma.1
 
 rule generate_data_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_clust_stats:
     output:
-        #[   
-        #    f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
         [   
             f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(30)
@@ -327,12 +585,10 @@ rule generate_data_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_clu
         ]
     run:
         cmds=[
-            #f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}",
-            #f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_RPS10.cs_0_025.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_RPS10.cs_0_05.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_RPS10.cs_0_1.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_RPS10.cs_0_2.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
@@ -344,10 +600,6 @@ rule generate_data_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_clu
 
 rule dino_normalize_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_clust_stats:
     input:
-        #[   
-        #    f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
         [
             f"{config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(30)
@@ -365,10 +617,6 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_cl
             for d_i in range(30)
         ]
     output:
-        #[
-        #    f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(30)
-        #],
         [
             f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(30)
@@ -387,12 +635,10 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_cl
         ]
     run:
         cmds=[
-            #f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
             f"mkdir -p {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}",
-            #f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
             f"python run_dino.py {config['output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
@@ -405,10 +651,6 @@ rule dino_normalize_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_cl
 
 rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_RPS10_RPS10_cond_mult_clusts_per_clust_stats:
     input:
-        #[
-        #    f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-        #    for d_i in range(3)
-        #],
         [
             f"{config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
             for d_i in range(3)
@@ -426,7 +668,6 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_RPS10_RPS
             for d_i in range(3)
         ]
     output:
-        #out_0_025=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10_RPS10.sigma.10.cs.0_025.condition.mult_clusts.per_clust_stats.tsv",
         out_0_05=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10_RPS10.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
         out_0_1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10_RPS10.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
         out_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_RPS10_RPS10.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
@@ -434,7 +675,6 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_RPS10_RPS
     run:
         cmds=[
             f"mkdir -p {config['spatialcorr_output_location']}",
-            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_025_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_025}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_05}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_1}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_RPS10_RPS10_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_2}}",
@@ -572,6 +812,60 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_S100A13_S
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_1}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_2}}",
             f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 5 -t 10 -o {{output.out_0_4}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+##################### Use this gene to vary sigma ######################################### # TODO HERE
+# We'll use this gene to test how the bandwidth parameter changes the output
+# We'll vary the bandwidth from 2.5, 10, and 20 (note,5 has been applied in previous rules)
+rule run_test_vary_sigma_condition_none_test_whr_sigma_10_cs_0_025_to_0_2_S100A13_S100A13_cond_mult_clusts_per_clust_stats:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            for d_i in range(3)
+        ]
+    output:
+        out_s_2_5_cs_0_05=f"{config['spatialcorr_output_location']}/sigma.2_5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_2_5_cs_0_1=f"{config['spatialcorr_output_location']}/sigma.2_5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_2_5_cs_0_2=f"{config['spatialcorr_output_location']}/sigma.2_5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_2_5_cs_0_4=f"{config['spatialcorr_output_location']}/sigma.2_5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_4.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_10_cs_0_05=f"{config['spatialcorr_output_location']}/sigma.10.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_10_cs_0_1=f"{config['spatialcorr_output_location']}/sigma.10.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_10_cs_0_2=f"{config['spatialcorr_output_location']}/sigma.10.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_10_cs_0_4=f"{config['spatialcorr_output_location']}/sigma.10.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_4.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_20_cs_0_05=f"{config['spatialcorr_output_location']}/sigma.20.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_20_cs_0_1=f"{config['spatialcorr_output_location']}/sigma.20.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_20_cs_0_2=f"{config['spatialcorr_output_location']}/sigma.20.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
+        out_s_20_cs_0_4=f"{config['spatialcorr_output_location']}/sigma.20.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_4.condition.mult_clusts.per_clust_stats.tsv",
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 2.5 -t 5 -o {{output.out_s_2_5_cs_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 2.5 -t 5 -o {{output.out_s_2_5_cs_0_1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 2.5 -t 5 -o {{output.out_s_2_5_cs_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 2.5 -t 5 -o {{output.out_s_2_5_cs_0_4}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 10 -t 10 -o {{output.out_s_10_cs_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 10 -t 10 -o {{output.out_s_10_cs_0_1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 10 -t 10 -o {{output.out_s_10_cs_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 10 -t 10 -o {{output.out_s_10_cs_0_4}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 20 -t 10 -o {{output.out_s_20_cs_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 20 -t 10 -o {{output.out_s_20_cs_0_1}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 20 -t 10 -o {{output.out_s_20_cs_0_2}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -c cluster -f dino -n 2 -b 20 -t 10 -o {{output.out_s_20_cs_0_4}}",
         ]
         for c in cmds:
             shell(f"echo {c}")
@@ -2756,6 +3050,119 @@ rule run_test_sigma_5_condition_clust_test_bhr_diff_corr_between_0_1_to_0_4_diff
 
 
 
+###############################################################
+#   Generate null data for two histological regions in which
+#   there is zero correlation at each spot, but means differ
+#   between two regions. The two regions partition the slide
+#   in half.
+###############################################################
+DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS = 'config_static.corr.differ.means.2'
+rule generate_data_two_clusts_static_corr_differ_means:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2) # TODO 200
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/config_static.corr.differ.means.2",
+            f"python simulate_data_within_condition.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_static_corr_differ_means_2.json -o {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule generate_data_two_clusts_static_corr_differ_means_for_figure:
+    output:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE/{d_i}.tsv"
+            for d_i in range(2) # TODO 200
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/config_static.corr.differ.means.2",
+            f"python simulate_data_within_condition.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_static_corr_differ_means_2.json -o {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_static_corr_differ_means:
+    input:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2) 
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule dino_normalize_two_clusts_static_corr_differ_means_for_figure:
+    input:
+        [
+            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    run:
+        cmds=[
+            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE",
+            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}_FOR_FIGURE"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+rule run_test_sigma_5_condition_clust_test_whr_two_clusts_static_corr_differ_means:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(2)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_within_dino-config_static.corr.differ.means.2.tsv"
+    run:
+        cmds=[
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -c cluster -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+# Run scHOT on these simulated datasets
+rule run_scHOT_two_clusts_static_corr_differ_means:
+    input:
+        [
+            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
+            for d_i in range(200)
+        ]
+    output:
+        f"{config['spatialcorr_output_location']}/scHOT_dino-config_static.corr.differ.means.2.tsv"
+    run:
+        cmds=[
+            "mkdir -p ./scHOT_tmp",
+            f"mkdir -p {config['spatialcorr_output_location']}",
+            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} -f dino -n 50 -o {{output}}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
 
 
 
@@ -3179,65 +3586,6 @@ rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0025_to_0_1_PECAM1_P
             shell(f"echo {c}")
             shell(c)
 
-
-###############################################################
-#   Generate null data for two histological regions in which
-#   there is zero correlation at each spot, but means differ
-#   between two regions. The two regions partition the slide
-#   in half.
-###############################################################
-DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS = 'config_static.corr.differ.means.2'
-rule generate_data_two_clusts_static_corr_differ_means:
-    output:
-        [
-            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
-            for d_i in range(2) # TODO 200
-        ]
-    run:
-        cmds=[
-            f"mkdir -p {config['output_location']}/config_static.corr.differ.means.2",
-            f"python simulate_data_within_condition.py -s spotwise -n 2 -i {config['simulation_configs']}/sim_config_static_corr_differ_means_2.json -o {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
-        ]
-        for c in cmds:
-            shell(f"echo {c}")
-            shell(c)
-
-rule dino_normalize_two_clusts_static_corr_differ_means:
-    input:
-        [
-            f"{config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
-            for d_i in range(2) 
-        ]
-    output:
-        [
-            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
-            for d_i in range(2)
-        ]
-    run:
-        cmds=[
-            f"mkdir -p {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}",
-            f"python run_dino.py {config['output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}"
-        ]
-        for c in cmds:
-            shell(f"echo {c}")
-            shell(c)
-
-rule run_test_sigma_5_condition_clust_test_whr_two_clusts_static_corr_differ_means:
-    input:
-        [
-            f"{config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS}/{d_i}.tsv"
-            for d_i in range(2)
-        ]
-    output:
-        f"{config['spatialcorr_output_location']}/sigma_5_condition_custer_test_within_dino-config_static.corr.differ.means.2.tsv"
-    run:
-        cmds=[
-            f"mkdir -p {config['spatialcorr_output_location']}",
-            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_TWO_CLUSTS_STATIC_CORR_DIFFER_MEANS} -f dino -n 20 -b 5 -t 10 -c cluster -o {{output}}"
-        ]
-        for c in cmds:
-            shell(f"echo {c}")
-            shell(c)
 
 
 ###############################################################
