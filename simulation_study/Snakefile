@@ -2512,6 +2512,7 @@ rule run_test_sigma_5_condition_mult_clusts_test_bhr_multiple_genes_diff_0_2_two
 # test scHOT on these data.
 ##############################################################################
 
+DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST = 'gene.all_S100A13.sigma.10.cs.0_025.one_clust'
 DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST = 'gene.all_S100A13.sigma.10.cs.0_05.one_clust' 
 DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST = 'gene.all_S100A13.sigma.10.cs.0_1.one_clust'                                                
 DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST = 'gene.all_S100A13.sigma.10.cs.0_2.one_clust'                                                
@@ -2519,6 +2520,10 @@ DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST = 'gene.all_S100A13.sigma.10.cs.0_4.o
 
 rule generate_data_sigma_10_cs_0_0025_to_0_1_S100A13_S100A13_one_clust:
     output:
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
         [
             f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
@@ -2530,71 +2535,165 @@ rule generate_data_sigma_10_cs_0_0025_to_0_1_S100A13_S100A13_one_clust:
         [
             f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
+        ]
+        #[
+        #    f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}/{d_i}.tsv"
+        #    for d_i in range(30)
+        #]
+    run:
+        cmds=[
+            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}",
+            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
+            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
+            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
+            #f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_one_clust_S100A13.cs_0_025.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_one_clust_S100A13.cs_0_05.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_one_clust_S100A13.cs_0_1.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
+            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_one_clust_S100A13.cs_0_2.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
+            #f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_one_clust_S100A13.cs_0_4.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}"
+        ]
+        for c in cmds:
+            shell(f"echo {c}")
+            shell(c)
+
+
+rule dino_normalize_sigma_10_cs_0_0025_to_0_1_S100A13_S100A13_one_clust:
+    input:
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
         ],
         [
             f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
         ]
+        #[
+        #    f"{config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}/{d_i}.tsv"
+        #    for d_i in range(30)
+        #]
+    output:
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ],
+        [
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}/{d_i}.tsv"
+            for d_i in range(30)
+        ]
+        #[
+        #    f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}/{d_i}.tsv"
+        #    for d_i in range(30)
+        #]
     run:
         cmds=[
-            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
-            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
-            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
-            f"mkdir -p {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}",
-            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.05 -n 30 -g S100A13,S100A13 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
-            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.1 -n 30 -g S100A13,S100A13 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
-            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.2 -n 30 -g S100A13,S100A13 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
-            f"python simulate_data_within_no_condition.py -b 10 -s spotwise -c 0.4 -n 30 -g S100A13,S100A13 -o {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}"
-
-
-            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_05.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}",
-            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_1.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}",
-            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_2.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}",
-            f"python simulate_data_within_condition_est_condition.py -i {config['simulation_configs']}/sim_config_within_changing_corrs_mult_clusts_HSP90AB1.cs_0_4.per_clust_ests.json -s spotwise -n 30 -o {config['output_location']}/{DSET_HSP90AB1_HSP90AB1_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}"
+            f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
+            f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
+            #f"mkdir -p {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}",
+            f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}",
+            f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}",
+            f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}",
+            f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}",
+            #f"python run_dino.py {config['output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST} {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}"
         ]
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
 
 
-
-
-
-rule run_scHOT_sigma_10_cs_0_025_to_0_2_S100A13_S100A13_cond_mult_clusts_per_clust_stats:
+rule run_test_sigma_5_condition_none_test_whr_sigma_10_cs_0_0025_to_0_1_S100A13_S100A13_one_clust:
     input:
         [
-            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
         ],
         [
-            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
         ],
         [
-            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
-            for d_i in range(30)
-        ],
-        [
-            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST}/{d_i}.tsv"
             for d_i in range(30)
         ]
+        #[
+        #    f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST}/{d_i}.tsv"
+        #    for d_i in range(30)
+        #]
+        #[
+        #    f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_ONE_CLUST}/{d_i}.tsv"
+        #    for d_i in range(30)
+        #]
     output:
-        out_0_05=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
-        out_0_1=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
-        out_0_2=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
-        out_0_4=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_4.condition.mult_clusts.per_clust_stats.tsv"
+        out_0_025=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_025.condition.one_clusts.tsv",
+        out_0_05=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.one_clusts.tsv",
+        out_0_1=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.one_clust.tsv"
+        #out_0_2=f"{config['spatialcorr_output_location']}/sigma.5.condition.mult_clusts.test.within.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.one_clust.tsv"
     run:
         cmds=[
-            "mkdir -p ./scHOT_tmp",
             f"mkdir -p {config['spatialcorr_output_location']}",
-            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_05}}",
-            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_1}}",
-            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_2}}",
-            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_4}}"
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_025_ONE_CLUST} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_025}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_ONE_CLUST} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_05}}",
+            f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_ONE_CLUST} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_1}}"
+            #f"python run_spatialcorr_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_ONE_CLUST} -c cluster -f dino -n 20 -b 5 -t 10 -o {{output.out_0_2}}"
         ]
         for c in cmds:
             shell(f"echo {c}")
             shell(c)
+
+
+#rule run_scHOT_sigma_10_cs_0_025_to_0_2_S100A13_S100A13_cond_mult_clusts_per_clust_stats:
+#    input:
+#        [
+#            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+#            for d_i in range(30)
+#        ],
+#        [
+#            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+#            for d_i in range(30)
+#        ],
+#        [
+#            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+#            for d_i in range(30)
+#        ],
+#        [
+#            f"{config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS}/{d_i}.tsv"
+#            for d_i in range(30)
+#        ]
+#    output:
+#        out_0_05=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_05.condition.mult_clusts.per_clust_stats.tsv",
+#        out_0_1=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_1.condition.mult_clusts.per_clust_stats.tsv",
+#        out_0_2=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_2.condition.mult_clusts.per_clust_stats.tsv",
+#        out_0_4=f"{config['spatialcorr_output_location']}/method.scHOT.features.dino-gene.all_S100A13_S100A13.sigma.10.cs.0_4.condition.mult_clusts.per_clust_stats.tsv"
+#    run:
+#        cmds=[
+#            "mkdir -p ./scHOT_tmp",
+#            f"mkdir -p {config['spatialcorr_output_location']}",
+#            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_05_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_05}}",
+#            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_1_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_1}}",
+#            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_2_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_2}}",
+#            f"python run_scHOT_on_sim.py {config['dino_output_location']}/{DSET_S100A13_S100A13_S_10_CS_0_4_COND_MULT_PER_CLUST_STATS} -f dino -n 100 -o {{output.out_0_4}}"
+#        ]
+#        for c in cmds:
+#            shell(f"echo {c}")
+#            shell(c)
 
 
 
